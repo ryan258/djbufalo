@@ -1,4 +1,4 @@
-// Self-check for static/js/main.js — `node main.test.js`, no deps.
+// Self-check for assets/js/main.js — `node main.test.js`, no deps.
 // Covers the three things that were actually broken: boot order, the
 // double-fired row toggle, and player labels surviving a language switch.
 const assert = require('assert');
@@ -39,15 +39,21 @@ class El {
 }
 
 const heroSpan = new El('span', { 'data-i18n': '', 'data-es': 'ESCUCHAR AHORA', 'data-en': 'LISTEN NOW' });
-const heroBtn = new El('button', { id: 'hero-listen-btn', 'data-track': 'GALPÓN 12 (CIERRE)', 'data-bpm': '126' });
+const heroBtn = new El('button', { id: 'hero-listen-btn', 'data-id': 'galpon-12', 'data-bpm': '126' });
 heroBtn.append(heroSpan);
 
-const mkRow = (title, bpm) => {
-  const row = new El('div', { class: 'set-row', 'data-title': title, 'data-bpm': String(bpm) });
+const mkRow = (id, title, titleEn, bpm) => {
+  const row = new El('div', {
+    class: 'set-row', 'data-id': id, 'data-title': title, 'data-title-en': titleEn,
+    'data-bpm': String(bpm),
+  });
   row.append(new El('button', { class: 'play-btn' }));
   return row;
 };
-const rows = [mkRow('GALPÓN 12', 126), mkRow('CIERRE EN LA TERRAZA', 128)];
+const rows = [
+  mkRow('galpon-12', 'GALPÓN 12', 'GALPÓN 12', 126),
+  mkRow('manzia-night', 'NOCHE MANZIA EN CHACARITA', 'MANZIA BOOKINGS NIGHT', 125),
+];
 
 const byId = {
   'audio-player-bar': new El('div', { id: 'audio-player-bar' }),
@@ -75,9 +81,12 @@ const document = {
 };
 
 // ---- stub Web Audio -------------------------------------------------------
+// Only startAtmosphere() makes a filter, and only stopAtmosphere() cancels a
+// scheduled ramp — so the difference is how many pads are still sounding.
+let padsStarted = 0, padsFaded = 0;
 const param = () => ({
   value: 0, setValueAtTime() {}, linearRampToValueAtTime() {},
-  exponentialRampToValueAtTime() {}, cancelScheduledValues() {},
+  exponentialRampToValueAtTime() {}, cancelScheduledValues() { padsFaded++; },
 });
 const node = () => ({
   frequency: param(), gain: param(), type: '',
@@ -87,7 +96,8 @@ const window = {
   AudioContext: function () {
     this.currentTime = 0; this.state = 'running'; this.destination = {};
     this.resume = () => {};
-    this.createOscillator = node; this.createGain = node; this.createBiquadFilter = node;
+    this.createOscillator = node; this.createGain = node;
+    this.createBiquadFilter = () => { padsStarted++; return node(); };
   },
 };
 
@@ -95,7 +105,7 @@ const store = {};
 const localStorage = { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = v; } };
 
 // ---- boot -----------------------------------------------------------------
-const src = fs.readFileSync('static/js/main.js', 'utf8');
+const src = fs.readFileSync('assets/js/main.js', 'utf8');
 new Function('document', 'window', 'localStorage', src)(document, window, localStorage);
 
 // 1. Boot order: setLanguage() reads the player nodes, so declaring them after
@@ -142,6 +152,36 @@ rows[0].click();
 rows[1].click();
 assert.ok(!rows[0].classList.contains('is-playing'));
 assert.ok(rows[1].classList.contains('is-playing'));
+
+// 7. The hero button and the rows must agree on what identifies a track. It
+//    used to send a hand-typed title ('GALPÓN 12 (CIERRE)') that matched no
+//    row, so playback started with nothing lit anywhere in the list.
+rows[1].click();                       // stop
+heroBtn.click();
+assert.ok(rows[0].classList.contains('is-playing'),
+  'hero button must light the set it plays');
+
+// 8. Track names follow the language toggle — the row carries both, so the
+//    player bar must re-read rather than keep the language it started in.
+langBtns[0].click();
+assert.ok(byId['player-track-display'].textContent.startsWith('GALPÓN 12'));
+rows[1].click();
+assert.ok(byId['player-track-display'].textContent.startsWith('NOCHE MANZIA'),
+  'Spanish title in Spanish mode');
+langBtns[1].click();
+assert.ok(byId['player-track-display'].textContent.startsWith('MANZIA BOOKINGS NIGHT'),
+  'English title after switching to English');
+rows[1].click();                       // leave playback stopped
+
+// 9. Switching sets mid-playback goes straight to startPlayback, bypassing
+//    stopPlayback. Without an explicit fade the outgoing pad's oscillators are
+//    orphaned by the new refs and keep sounding forever, one more per switch.
+padsStarted = padsFaded = 0;
+rows[0].click();                       // play A
+rows[1].click();                       // switch to B without stopping first
+assert.strictEqual(padsStarted - padsFaded, 1,
+  'switching sets must leave exactly one pad sounding');
+rows[1].click();                       // stop
 
 assert.strictEqual(store.djbufalo_lang, 'en', 'language choice persists');
 console.log('main.js self-check: all assertions passed');

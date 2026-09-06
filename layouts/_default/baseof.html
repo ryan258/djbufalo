@@ -19,6 +19,7 @@
   <meta property="og:description" content="{{ .Site.Params.description }}">
   <meta property="og:image" content="{{ "images/hero-buffalo-clean.webp" | absURL }}">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Hugo Pipes SCSS Compilation -->
   {{ $sass := resources.Get "sass/main.scss" }}
@@ -28,12 +29,13 @@
   <link rel="icon" type="image/svg+xml" href="{{ "images/manzia-bookings-logo.svg" | relURL }}">
 </head>
 <body id="top">
+  <a href="#main-content" class="skip-link" data-i18n data-es="SALTAR AL CONTENIDO" data-en="SKIP TO CONTENT">SALTAR AL CONTENIDO</a>
   <div class="ambient-grain" aria-hidden="true"></div>
 
   <div class="site-wrap">
     {{ partial "nav.html" . }}
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       {{ block "main" . }}{{ end }}
     </main>
 
@@ -52,6 +54,7 @@
     </div>
   </div>
 
-  <script src="{{ "js/main.js" | relURL }}"></script>
+  {{ $js := resources.Get "js/main.js" | resources.Fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 </body>
 </html>

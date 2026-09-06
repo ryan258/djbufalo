@@ -15,8 +15,7 @@
 
   <div class="hero-content">
     <div class="hero-catalog">
-      <div>BUENOS AIRES,</div>
-      <div>ARG</div>
+      <div>BUENOS AIRES, ARG</div>
       <div>MANZIA BOOKINGS</div>
       <div>BUF-019</div>
     </div>
@@ -27,12 +26,11 @@
 
     <div class="hero-cierre">CIERRE / CHACARITA / BUENOS AIRES</div>
 
-    <div class="hero-divider" aria-hidden="true"></div>
-
     <div class="hero-categories">CLUB CULTURA RESISTENCIA RITMO</div>
 
     <div>
-      <button id="hero-listen-btn" class="btn-action" type="button" data-track="GALPÓN 12 (CIERRE)" data-bpm="126">
+      {{ $first := index hugo.Data.sets.items 0 }}
+      <button id="hero-listen-btn" class="btn-action" type="button" data-id="{{ $first.id }}" data-bpm="{{ $first.bpm }}">
         <span data-i18n data-es="ESCUCHAR AHORA" data-en="LISTEN NOW">ESCUCHAR AHORA</span>
         <span class="btn-arrow" aria-hidden="true">&rarr;</span>
       </button>

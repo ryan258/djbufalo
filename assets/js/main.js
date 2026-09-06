@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------
   let audioCtx = null;
   let isPlaying = false;
-  let currentTrack = null;
+  let currentId = null;
   let currentBpm = 126;
   let beatInterval = null;
   let currentLang = getStoredLang();
@@ -56,9 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (span) span.textContent = text;
   }
 
-  function updatePlayerUI(playing, title = '', bpm = 126) {
+  // The row owns a track's display name in both languages, so the player bar
+  // re-reads it per render instead of caching whichever language was current
+  // when playback started.
+  function trackTitle(id) {
+    for (const row of setRows) {
+      if (row.getAttribute('data-id') === id) {
+        return row.getAttribute(currentLang === 'en' ? 'data-title-en' : 'data-title') || '';
+      }
+    }
+    return '';
+  }
+
+  function updatePlayerUI(playing, id = '', bpm = 126) {
     if (!playerBar) return;
     const isEs = currentLang === 'es';
+    const title = trackTitle(id);
 
     if (playing) {
       playerBar.classList.add('is-active');
@@ -78,9 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setRows.forEach(row => {
-      const active = playing && row.getAttribute('data-title') === title;
+      const active = playing && row.getAttribute('data-id') === id;
       row.classList.toggle('is-playing', active);
-      row.querySelector('.play-btn').innerHTML = active ? PAUSE_ICON : PLAY_ICON;
+      const btn = row.querySelector('.play-btn');
+      btn.innerHTML = active ? PAUSE_ICON : PLAY_ICON;
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
   }
 
@@ -99,6 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const alt = el.getAttribute(`data-alt-${lang}`);
+      if (alt) el.setAttribute('alt', alt);
+    });
+
     langBtns.forEach(btn => {
       const isActive = btn.getAttribute('data-lang') === lang;
       btn.classList.toggle('active', isActive);
@@ -107,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Re-assert player labels: the data-i18n pass above just overwrote the hero
     // button with its idle text even when a set is mid-playback.
-    updatePlayerUI(isPlaying, currentTrack || '', currentBpm);
+    updatePlayerUI(isPlaying, currentId || '', currentBpm);
   }
 
   langBtns.forEach(btn => {
@@ -218,10 +238,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 550);
   }
 
-  function startPlayback(title, bpm = 126) {
+  function startPlayback(id, bpm = 126) {
     initAudioContext();
+    // Switching sets mid-playback lands here without passing through
+    // stopPlayback, so fade the outgoing pad before its refs are overwritten.
+    if (isPlaying) stopAtmosphere();
     isPlaying = true;
-    currentTrack = title;
+    currentId = id;
     currentBpm = bpm;
 
     startAtmosphere();
@@ -233,21 +256,21 @@ document.addEventListener('DOMContentLoaded', () => {
     triggerPulse();
     beatInterval = setInterval(triggerPulse, beatMs);
 
-    updatePlayerUI(true, title, bpm);
+    updatePlayerUI(true, id, bpm);
   }
 
   function stopPlayback() {
     isPlaying = false;
     stopAtmosphere();
     if (beatInterval) clearInterval(beatInterval);
-    updatePlayerUI(false, currentTrack || '', currentBpm);
+    updatePlayerUI(false, currentId || '', currentBpm);
   }
 
-  function togglePlayback(title, bpm) {
-    if (isPlaying && currentTrack === title) {
+  function togglePlayback(id, bpm) {
+    if (isPlaying && currentId === id) {
       stopPlayback();
     } else {
-      startPlayback(title, bpm);
+      startPlayback(id, bpm);
     }
   }
 
@@ -256,9 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------
   if (heroListenBtn) {
     heroListenBtn.addEventListener('click', () => {
-      const track = heroListenBtn.getAttribute('data-track') || 'GALPÓN 12 (CIERRE)';
       const bpm = parseInt(heroListenBtn.getAttribute('data-bpm') || '126', 10);
-      togglePlayback(track, bpm);
+      togglePlayback(heroListenBtn.getAttribute('data-id'), bpm);
     });
   }
 
@@ -267,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setRows.forEach(row => {
     row.addEventListener('click', () => {
       togglePlayback(
-        row.getAttribute('data-title'),
+        row.getAttribute('data-id'),
         parseInt(row.getAttribute('data-bpm') || '126', 10)
       );
     });
@@ -277,8 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
     playerToggleBtn.addEventListener('click', () => {
       if (isPlaying) {
         stopPlayback();
-      } else if (currentTrack) {
-        startPlayback(currentTrack, currentBpm);
+      } else if (currentId) {
+        startPlayback(currentId, currentBpm);
       }
     });
   }

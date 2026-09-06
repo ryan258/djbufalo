@@ -2,6 +2,7 @@
 # so CI always wins. Point this at https://djbufalo.com/ and add a static/CNAME
 # once DNS for the custom domain actually resolves to GitHub.
 baseURL = 'https://ryan258.github.io/djbufalo/'
+locale = 'es-AR'         # default copy is Spanish; main.js flips <html lang> on toggle
 title = 'DJ BUFALO — Never Rushes The Drop'
 disableKinds = ['taxonomy', 'term']
 
