@@ -17,7 +17,7 @@ $color-charcoal-elevated: #22211E;
 // Text colors
 $color-text-primary: $color-bone;
 $color-text-secondary: #AAA69E;
-$color-text-dim: #7C7870;
+$color-text-dim: #918D85;         // 4.87:1 on $color-charcoal-elevated, its worst case
 $color-text-faint: #524F48;
 
 // Borders & grid lines (§9 "thin rules")
@@ -72,6 +72,7 @@ $grid-gutter: $space-3;          // 24px
 }
 
 // Breakpoints
+$breakpoint-wide: 1320px;        // widest band: outer margin can absorb marginalia
 $breakpoint-desktop: 1120px;
 $breakpoint-tablet: 768px;
 $breakpoint-mobile: 580px;

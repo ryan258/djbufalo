@@ -32,6 +32,29 @@ html {
   outline: none;
 }
 
+// Visible only once it takes focus. Fixed, not absolute: `top: -100%` would
+// resolve against body's full height and park it thousands of pixels away.
+.skip-link {
+  position: fixed;
+  left: $space-2;
+  top: $space-2;
+  transform: translateY(calc(-100% - #{$space-3}));
+  z-index: 1000;
+  background: $color-obsidian;
+  color: $color-amber;
+  border: 1px solid $color-amber;
+  padding: $space-1 $space-2;
+  font-family: $font-mono;
+  font-size: $type-micro;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+
+  &:focus {
+    transform: none;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -78,10 +101,6 @@ body {
 
   &:last-of-type {
     padding-bottom: $space-section;
-  }
-
-  &.border-top {
-    border-top: 1px solid $color-border;
   }
 
   @media (max-width: $breakpoint-tablet) {
