@@ -1,0 +1,48 @@
+<section id="rider" class="site-section">
+  <div class="section-header">
+    <h2 class="section-title" data-i18n data-es="RIDER TÉCNICO Y DE HOSPITALIDAD" data-en="TECHNICAL &amp; HOSPITALITY RIDER">RIDER TÉCNICO Y DE HOSPITALIDAD</h2>
+    <div class="section-tagline" data-i18n data-es="EL SONIDO TAMBIÉN CUIDA" data-en="EL SONIDO TAMBIÉN CUIDA">EL SONIDO TAMBIÉN CUIDA</div>
+  </div>
+
+  <div class="rider-layout">
+    <!-- Purple stamp overlay -->
+    <img src="{{ "images/stamp-same-animal.webp" | relURL }}" alt="Same animal different night" class="rider-stamp">
+
+    <!-- Technical Column -->
+    <div class="rider-col">
+      <div class="rider-header">
+        <div class="rider-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l.06.06a1.65 1.65 0 0 0 .33 1.82 1.65 1.65 0 0 0 1.51 1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+        <h3 class="rider-title" data-i18n data-es="{{ hugo.Data.rider.technical.title_es }}" data-en="{{ hugo.Data.rider.technical.title_en }}">{{ hugo.Data.rider.technical.title_es }}</h3>
+      </div>
+      <ul class="rider-list">
+        {{ range hugo.Data.rider.technical.items }}
+        <li data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <!-- Hospitality Column -->
+    <div class="rider-col">
+      <div class="rider-header">
+        <div class="rider-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M8 22h8"></path>
+            <path d="M12 15v7"></path>
+            <path d="M5 3h14l-7 12-7-12z"></path>
+          </svg>
+        </div>
+        <h3 class="rider-title" data-i18n data-es="{{ hugo.Data.rider.hospitality.title_es }}" data-en="{{ hugo.Data.rider.hospitality.title_en }}">{{ hugo.Data.rider.hospitality.title_es }}</h3>
+      </div>
+      <ul class="rider-list">
+        {{ range hugo.Data.rider.hospitality.items }}
+        <li data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>

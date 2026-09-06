@@ -1,0 +1,41 @@
+items:
+  - id: galpon-12
+    title_es: "GALPÓN 12"
+    title_en: "GALPÓN 12"
+    location_es: "Buenos Aires, ARG"
+    location_en: "Buenos Aires, ARG"
+    date_es: "19 Sep 2023"
+    date_en: "19 Sep 2023"
+    duration: "04:17:08"
+    image: "/images/set-galpon12.webp"
+    bpm: 126
+
+  - id: manzia-night
+    title_es: "NOCHE MANZIA EN CHACARITA"
+    title_en: "MANZIA BOOKINGS NIGHT"
+    location_es: "Chacarita, ARG"
+    location_en: "Chacarita, ARG"
+    date_es: "03 Jun 2023"
+    date_en: "03 Jun 2023"
+    duration: "03:58:21"
+    image: "/images/set-manada.webp"
+    bpm: 125
+
+  - id: cierre-terraza
+    title_es: "CIERRE EN LA TERRAZA"
+    title_en: "CIERRE EN LA TERRAZA"
+    location_es: "Buenos Aires, ARG"
+    location_en: "Buenos Aires, ARG"
+    date_es: "14 Ene 2023"
+    date_en: "14 Jan 2023"
+    duration: "04:02:11"
+    image: "/images/set-terraza.webp"
+    bpm: 128
+
+feature:
+  image: "/images/sets-feature-historia.webp"
+  alt_es: "Aquí también se baila historia"
+  alt_en: "Here too history is danced"
+  link_text_es: "EXPLORAR TODOS LOS SETS"
+  link_text_en: "BROWSE ALL SETS"
+  link_url: "#sets"

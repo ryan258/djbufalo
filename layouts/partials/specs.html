@@ -1,0 +1,45 @@
+<section id="specs" class="site-section">
+  <div class="section-header">
+    <h2 class="section-title" data-i18n data-es="SPECS DE PISTA" data-en="SET SPECS">SPECS DE PISTA</h2>
+    <div class="section-tagline" data-i18n data-es="LA PRECISIÓN ES UNA FORMA DE RESPETAR AL QUE BAILA" data-en="PRECISION IS A FORM OF RESPECT">LA PRECISIÓN ES UNA FORMA DE RESPETAR AL QUE BAILA</div>
+  </div>
+
+  <div class="specs-grid">
+    {{ range hugo.Data.specs.items }}
+    <div class="spec-card">
+      <div class="spec-top">
+        <div class="spec-icon" aria-hidden="true">
+          {{ if eq .icon "tempo" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <line x1="4" y1="9" x2="4" y2="15"></line>
+            <line x1="8" y1="5" x2="8" y2="19"></line>
+            <line x1="12" y1="3" x2="12" y2="21"></line>
+            <line x1="16" y1="7" x2="16" y2="17"></line>
+            <line x1="20" y1="10" x2="20" y2="14"></line>
+          </svg>
+          {{ else if eq .icon "clock" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <polyline points="12 7 12 12 15 15"></polyline>
+          </svg>
+          {{ else if eq .icon "pin" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          {{ else }}
+          <!-- Buffalo Head Icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 7c1-3 4-4 6-2 1 1 2 2 3 2s2-1 3-2c2-2 5-1 6 2 1 3-1 6-3 7-1 3-3 5-6 5s-5-2-6-5C4 13 2 10 3 7zm5 3a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm8 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
+          </svg>
+          {{ end }}
+        </div>
+        <div class="spec-label" data-i18n data-es="{{ .label_es }}" data-en="{{ .label_en }}">{{ .label_es }}</div>
+      </div>
+
+      <div class="spec-value" data-i18n data-es="{{ .value_es }}" data-en="{{ .value_en }}">{{ .value_es }}</div>
+      <div class="spec-sub" data-i18n data-es="{{ .sub_es }}" data-en="{{ .sub_en }}">{{ .sub_es }}</div>
+    </div>
+    {{ end }}
+  </div>
+</section>

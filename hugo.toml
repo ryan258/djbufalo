@@ -1,0 +1,58 @@
+# Local-build default only — deploy.yml passes --baseURL from configure-pages,
+# so CI always wins. Point this at https://djbufalo.com/ and add a static/CNAME
+# once DNS for the custom domain actually resolves to GitHub.
+baseURL = 'https://ryan258.github.io/djbufalo/'
+title = 'DJ BUFALO — Never Rushes The Drop'
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  booking_email = 'booking@djbufalo.com'
+  description = 'DJ Bufalo is a Buenos Aires based selector, producer and cultural figure. Part animal, part myth, fully committed to the night.'
+
+[[menu.main]]
+  identifier = 'home'
+  name = 'INICIO'
+  url = '#home'
+  weight = 1
+  [menu.main.params]
+    name_en = 'HOME'
+
+[[menu.main]]
+  identifier = 'bio'
+  name = 'BIO'
+  url = '#bio'
+  weight = 2
+  [menu.main.params]
+    name_en = 'BIO'
+
+[[menu.main]]
+  identifier = 'specs'
+  name = 'SPECS'
+  url = '#specs'
+  weight = 3
+  [menu.main.params]
+    name_en = 'SPECS'
+
+[[menu.main]]
+  identifier = 'sets'
+  name = 'SETS'
+  url = '#sets'
+  weight = 4
+  [menu.main.params]
+    name_en = 'SETS'
+
+[[menu.main]]
+  identifier = 'rider'
+  name = 'RIDER'
+  url = '#rider'
+  weight = 5
+  [menu.main.params]
+    name_en = 'RIDER'
+
+[[menu.main]]
+  identifier = 'contact'
+  name = 'CONTACTO'
+  url = '#contact'
+  weight = 6
+  [menu.main.params]
+    name_en = 'CONTACT'

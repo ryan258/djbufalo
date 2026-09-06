@@ -1,0 +1,32 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand-logo" aria-label="DJ BUFALO">
+      DJ BUFALO
+    </a>
+
+    <nav class="main-nav" aria-label="Primary Navigation">
+      {{ range site.Menus.main }}
+      <a href="{{ .URL }}" class="nav-link{{ if eq .Identifier "home" }} active{{ end }}" data-i18n data-es="{{ .Name }}" data-en="{{ .Params.name_en }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+
+    <div class="header-meta">
+      <!-- Language Switcher -->
+      <div class="lang-switch" role="group" aria-label="Selector de idioma / Language Selector">
+        <button type="button" class="lang-btn active" data-lang="es" aria-label="Español Porteño">ES</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      </div>
+
+      {{ partial "motto-tag.html" . }}
+
+      <div class="header-globe" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>

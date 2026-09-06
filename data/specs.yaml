@@ -1,0 +1,36 @@
+items:
+  - id: tempo
+    label_es: "TEMPO"
+    label_en: "TEMPO"
+    value_es: "124 – 128 BPM"
+    value_en: "124 – 128 BPM"
+    sub_es: "DENSO / HIPNÓTICO / AL HUESO"
+    sub_en: "DEEP / HYPNOTIC / FUNCTIONAL"
+    icon: "tempo"
+
+  - id: set_length
+    label_es: "DURACIÓN"
+    label_en: "SET LENGTH"
+    value_es: "3 HORAS"
+    value_en: "3 HRS"
+    sub_es: "HECHO PARA BAJAR LA PERSIANA"
+    sub_en: "BUILT TO CLOSE"
+    icon: "clock"
+
+  - id: home_turf
+    label_es: "LA GUARIDA"
+    label_en: "HOME TURF"
+    value_es: "CHACARITA"
+    value_en: "CHACARITA"
+    sub_es: "BUENOS AIRES, CAPITAL"
+    sub_en: "BUENOS AIRES, ARG"
+    icon: "pin"
+
+  - id: signature
+    label_es: "LA MARCA"
+    label_en: "SIGNATURE"
+    value_es: "LA MIRADA CLAVADA"
+    value_en: "THE LONG STARE"
+    sub_es: "LA MISMA CHISPA. SIEMPRE."
+    sub_en: "SAME ENERGY. ALWAYS."
+    icon: "buffalo"

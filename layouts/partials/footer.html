@@ -1,0 +1,66 @@
+<footer id="contact" class="site-footer">
+  <div class="footer-main">
+    <!-- Left: MANZIA Bookings imprint -->
+    <div class="footer-imprint">
+      <img src="{{ "images/manzia-bookings-logo.svg" | relURL }}" alt="MANZIA Bookings" class="manada-mark">
+      <div class="stacked-tag" aria-hidden="true">
+        <span>DISCOS</span>
+        <span>FIESTAS</span>
+        <span>COMUNIDAD</span>
+        <span>BUENOS AIRES</span>
+      </div>
+    </div>
+
+    <!-- Center: Booking contact -->
+    <div class="footer-contact">
+      <div class="contact-title" data-i18n data-es="FECHAS / CONTACTO" data-en="BOOKINGS / CONTACT">FECHAS / CONTACTO</div>
+      <a href="mailto:{{ .Site.Params.booking_email }}" class="contact-email">
+        <span>{{ .Site.Params.booking_email }}</span>
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+
+    <!-- Right: Social channels & motto -->
+    <div class="footer-socials-wrap">
+      <div class="social-icons" aria-label="Social Profiles">
+        <!-- Instagram -->
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- Soundcloud -->
+        <a href="https://soundcloud.com" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.56 8.87V17h9.19a3.25 3.25 0 0 0 .69-6.43 5.42 5.42 0 0 0-5.19-3.7 5.51 5.51 0 0 0-4.69 2zM9.8 17V9.75a4.2 4.2 0 0 0-.8-.13V17zM7.6 17v-6.7a3 3 0 0 0-.8-.11V17zM5.4 17v-5.87c-.28.06-.55.15-.8.27V17zm-2.2 0v-4.5c-.28.23-.55.5-.8.8V17z"></path>
+          </svg>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+          </svg>
+        </a>
+
+        <!-- Spotify -->
+        <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"></path>
+          </svg>
+        </a>
+      </div>
+
+      {{ partial "motto-tag.html" . }}
+    </div>
+  </div>
+
+  <!-- Bottom Legal / Coordinates -->
+  <div class="footer-legal-bar">
+    <div data-i18n data-es="&copy; {{ now.Year }} DJ BUFALO. &nbsp; TODOS LOS DERECHOS RESERVADOS." data-en="&copy; {{ now.Year }} DJ BUFALO. &nbsp; ALL RIGHTS RESERVED.">&copy; {{ now.Year }} DJ BUFALO. &nbsp; TODOS LOS DERECHOS RESERVADOS.</div>
+    <div>BUENOS AIRES, ARG &nbsp; / &nbsp; MANZIA BOOKINGS &nbsp; / &nbsp; BUF-019</div>
+  </div>
+</footer>
