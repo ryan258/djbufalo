@@ -1,0 +1,38 @@
+---
+title: "FESTIVAL BAJADA // COSTANERA NORTE"
+title_en: "BAJADA FESTIVAL // COSTANERA NORTE"
+date_day: "05"
+date_month_es: "DIC"
+date_month_en: "DEC"
+date_full_es: "Sábado 05 Diciembre 2026"
+date_full_en: "Saturday 05 December 2026"
+venue: "FESTIVAL BAJADA"
+location_es: "Costanera Norte, Buenos Aires"
+location_en: "Costanera Norte, Buenos Aires"
+address_es: "Pabellón Río • Frente al Río de la Plata"
+address_en: "River Pavilion • Río de la Plata waterfront"
+time_es: "04:15 — CIERRE"
+time_en: "04:15 — CLOSE"
+doors_es: "Festival desde las 20:00 • Escenario Club"
+doors_en: "Festival starts 20:00 • Club Stage"
+weight: 4
+status_es: "PRÓXIMAMENTE"
+status_en: "COMING SOON"
+status_type: "soon"
+ticket_url: "mailto:booking@djbufalo.com?subject=Aviso%20Preventa%20Festival%20Bajada"
+capacity_es: "Preventa general disponible en Noviembre"
+capacity_en: "General presale available in November"
+sound_system: "L-Acoustics K2 Arena Rig & Dedicated Low Ends"
+image: "images/sets-feature-historia.webp"
+lineup:
+  - time: "20:00 — 04:15"
+    artist: "Artistas Internacionales & Locales"
+    role_es: "Escenario Club"
+    role_en: "Club Stage program"
+  - time: "04:15 — 07:30"
+    artist: "DJ BUFALO"
+    role_es: "Cierre Oficial del Festival"
+    role_en: "Official Festival Closing Set"
+---
+
+Cierre del año en el Pabellón Río frente al agua. DJ Bufalo toma el control del escenario club en las horas más oscuras de la madrugada para conducir la transición hacia el primer sol sobre el Río de la Plata.

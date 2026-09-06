@@ -1,0 +1,68 @@
+{{ define "main" }}
+<div class="site-section page-tour-dates">
+  <div class="section-header">
+    <div class="archive-cat" data-i18n data-es="AGENDA OFICIAL &bull; CABINAS &amp; CIERRES" data-en="OFFICIAL TOUR &bull; BOOTHS &amp; CLOSES">AGENDA OFICIAL &bull; CABINAS &amp; CIERRES</div>
+    <h1 class="headline-hero" data-i18n data-es="PRÓXIMAS FECHAS &amp; GIRAS" data-en="UPCOMING DATES &amp; TOURS">PRÓXIMAS FECHAS &amp; GIRAS</h1>
+    <div class="section-tagline" data-i18n data-es="CALENDARIO CONFIRMADO POR MANZIA BOOKINGS &mdash;" data-en="SCHEDULE CONFIRMED BY MANZIA BOOKINGS &mdash;">
+      CALENDARIO CONFIRMADO POR MANZIA BOOKINGS &mdash;
+    </div>
+  </div>
+
+  <div class="tour-policy-box">
+    <div class="policy-title" data-i18n data-es="CONDICIONES GENERALES DE CABINA Y PISTA:" data-en="GENERAL BOOTH &amp; DANCEFLOOR CONDITIONS:">CONDICIONES GENERALES DE CABINA Y PISTA:</div>
+    <ul class="policy-list">
+      <li data-i18n data-es="Sesiones de cierre continuo (3 horas mínimo). Horarios estrictos." data-en="Continuous closing sets (3 hours minimum). Strict schedule.">Sesiones de cierre continuo (3 horas mínimo). Horarios estrictos.</li>
+      <li data-i18n data-es="Cabina a oscuras. Prohibido filmar con flash en la pista." data-en="Dark booth. No flash recording on the dancefloor.">Cabina a oscuras. Prohibido filmar con flash en la pista.</li>
+      <li data-i18n data-es="Cero pedidos de canciones. Dejar que la música respire." data-en="Zero music requests. Let the music breathe.">Cero pedidos de canciones. Dejar que la música respire.</li>
+    </ul>
+  </div>
+
+  <div class="fechas-extended-list">
+    {{ range .Pages.ByWeight }}
+    <article class="fecha-card-detailed status-{{ .Params.status_type }}">
+      <div class="card-date-badge">
+        <span class="day-num">{{ .Params.date_day }}</span>
+        <span class="month-name" data-i18n data-es="{{ .Params.date_month_es }}" data-en="{{ .Params.date_month_en }}">{{ .Params.date_month_es }}</span>
+      </div>
+
+      <div class="card-venue-info">
+        <div class="venue-date-full" data-i18n data-es="{{ .Params.date_full_es }}" data-en="{{ .Params.date_full_en }}">{{ .Params.date_full_es }}</div>
+        <h2 class="venue-name">
+          <a href="{{ .RelPermalink }}" class="venue-title-link">{{ .Title }}</a>
+        </h2>
+        <div class="venue-city" data-i18n data-es="{{ .Params.location_es }}" data-en="{{ .Params.location_en }}">{{ .Params.location_es }}</div>
+      </div>
+
+      <div class="card-schedule-info">
+        <div class="sched-label" data-i18n data-es="CABINA:" data-en="BOOTH:">CABINA:</div>
+        <div class="sched-time num-tabular" data-i18n data-es="{{ .Params.time_es }}" data-en="{{ .Params.time_en }}">{{ .Params.time_es }}</div>
+      </div>
+
+      <div class="card-action-box">
+        {{ if eq .Params.status_type "soldout" }}
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Title }} &mdash; AGOTADO">
+          <span data-i18n data-es="AGOTADO" data-en="SOLD OUT">AGOTADO</span>
+          <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        {{ else }}
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-active">
+          <span data-i18n data-es="VER DETALLES" data-en="VIEW DETAILS">VER DETALLES</span>
+          <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  <div class="editorial-nav-footer">
+    <a href="{{ site.Home.RelPermalink }}" class="btn-action">
+      <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+    </a>
+    <a href="{{ "sets/" | relURL }}" class="btn-secondary">
+      <span data-i18n data-es="ESCUCHAR SETS" data-en="LISTEN TO SETS">ESCUCHAR SETS</span>
+      <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</div>
+{{ end }}

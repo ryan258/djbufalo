@@ -1,0 +1,46 @@
+<section id="merch" class="site-section">
+  <div class="section-header">
+    <h2 class="section-title" data-i18n data-es="CÁPSULA / ARCHIVO" data-en="CAPSULE / ARCHIVE">CÁPSULA / ARCHIVO</h2>
+    <div class="section-tagline" data-i18n data-es="OBJETOS TÉCNICOS Y TEXTILES &mdash; BUENOS AIRES" data-en="TECHNICAL &amp; TEXTILE OBJECTS &mdash; BUENOS AIRES">OBJETOS TÉCNICOS Y TEXTILES &mdash; BUENOS AIRES</div>
+  </div>
+
+  <div class="merch-grid">
+    {{ range hugo.Data.merch.items }}
+    <div class="merch-card status-{{ .status_type }}">
+      <div class="merch-thumb-wrap">
+        <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
+        <div class="merch-badge" data-i18n data-es="{{ .badge_es }}" data-en="{{ .badge_en }}">{{ .badge_es }}</div>
+        <div class="merch-code">{{ .code }}</div>
+      </div>
+
+      <div class="merch-body">
+        <div class="merch-price-row">
+          <span class="merch-price num-tabular">{{ .price }}</span>
+          <span class="merch-status tag-status-{{ .status_type }}" data-i18n data-es="{{ .status_es }}" data-en="{{ .status_en }}">{{ .status_es }}</span>
+        </div>
+
+        <h3 class="merch-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h3>
+        <p class="merch-desc" data-i18n data-es="{{ .desc_es }}" data-en="{{ .desc_en }}">{{ .desc_es }}</p>
+
+        <div class="merch-action">
+          {{ if eq .status_type "soldout" }}
+          <span class="btn-merch disabled" data-i18n data-es="EDICIÓN AGOTADA" data-en="SOLD OUT">EDICIÓN AGOTADA</span>
+          {{ else }}
+          <a href="mailto:{{ site.Params.booking_email }}?subject=Pedido%20Merch%20{{ .code }}" class="btn-merch">
+            <span data-i18n data-es="SOLICITAR PIEZA" data-en="ORDER ITEM">SOLICITAR PIEZA</span>
+            <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <div class="section-footer-action">
+    <a href="{{ "merch/" | relURL }}" class="feature-link">
+      <span data-i18n data-es="VER CATÁLOGO COMPLETO DE CÁPSULA" data-en="VIEW FULL CAPSULE CATALOG">VER CATÁLOGO COMPLETO DE CÁPSULA</span>
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</section>

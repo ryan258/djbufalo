@@ -9,7 +9,7 @@
     <div class="sets-col-left">
       <div class="sets-list">
         {{ range hugo.Data.sets.items }}
-        <div class="set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}">
+        <div class="set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" data-audio="{{ printf "audio/%s.mp3" .id | relURL }}">
           <div class="set-thumb">
             <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy"
                  data-i18n-alt data-alt-es="{{ .title_es }}" data-alt-en="{{ .title_en }}">
@@ -36,7 +36,7 @@
         {{ end }}
       </div>
 
-      <a href="{{ hugo.Data.sets.feature.link_url }}" class="feature-link">
+      <a href="{{ hugo.Data.sets.feature.link_url | relURL }}" class="feature-link">
         <span data-i18n data-es="{{ hugo.Data.sets.feature.link_text_es }}" data-en="{{ hugo.Data.sets.feature.link_text_en }}">{{ hugo.Data.sets.feature.link_text_es }}</span>
         <span aria-hidden="true">&rarr;</span>
       </a>

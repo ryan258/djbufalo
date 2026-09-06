@@ -1,0 +1,72 @@
+{{ define "main" }}
+<div class="site-section page-merch-catalog">
+  <div class="section-header">
+    <div class="archive-cat" data-i18n data-es="CÁPSULA OFICIAL &bull; OBJETOS TÉCNICOS" data-en="OFFICIAL CAPSULE &bull; TECHNICAL OBJECTS">CÁPSULA OFICIAL &bull; OBJETOS TÉCNICOS</div>
+    <h1 class="headline-hero" data-i18n data-es="INDUMENTARIA &amp; ACCESORIOS DE CABINA" data-en="APPAREL &amp; BOOTH ACCESSORIES">INDUMENTARIA &amp; ACCESORIOS DE CABINA</h1>
+    <div class="section-tagline" data-i18n data-es="FABRICADO EN BUENOS AIRES &mdash; EDICIONES LIMITADAS" data-en="MADE IN BUENOS AIRES &mdash; LIMITED EDITIONS">
+      FABRICADO EN BUENOS AIRES &mdash; EDICIONES LIMITADAS
+    </div>
+  </div>
+
+  <div class="merch-intro-note">
+    <p data-i18n
+       data-es="Objetos diseñados con la misma austeridad y solidez que el sonido. Prensados, confeccionados y serigrafiados en talleres de Buenos Aires. Envíos a todo el país y entregas en mano en Chacarita durante las noches de cabina."
+       data-en="Objects designed with the same austerity and weight as the sound. Pressed, tailored, and screenprinted in Buenos Aires workshops. Domestic shipping and hand delivery in Chacarita during booth nights.">
+      Objetos diseñados con la misma austeridad y solidez que el sonido. Prensados, confeccionados y serigrafiados en talleres de Buenos Aires. Envíos a todo el país y entregas en mano en Chacarita durante las noches de cabina.
+    </p>
+  </div>
+
+  <div class="merch-detailed-grid">
+    {{ range hugo.Data.merch.items }}
+    <article class="merch-full-card status-{{ .status_type }}">
+      <div class="merch-full-thumb">
+        <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
+        <span class="full-badge" data-i18n data-es="{{ .badge_es }}" data-en="{{ .badge_en }}">{{ .badge_es }}</span>
+        <span class="full-code">{{ .code }}</span>
+      </div>
+
+      <div class="merch-full-body">
+        <div class="merch-full-header">
+          <h2 class="merch-full-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h2>
+          <div class="merch-full-price num-tabular">{{ .price }}</div>
+        </div>
+
+        <p class="merch-full-desc" data-i18n data-es="{{ .desc_es }}" data-en="{{ .desc_en }}">{{ .desc_es }}</p>
+
+        <div class="merch-specs-box">
+          <div class="spec-line">
+            <span class="spec-k" data-i18n data-es="PRODUCCIÓN:" data-en="PRODUCTION:">PRODUCCIÓN:</span>
+            <span data-i18n data-es="Tirada limitada &bull; Buenos Aires" data-en="Limited run &bull; Buenos Aires">Tirada limitada &bull; Buenos Aires</span>
+          </div>
+          <div class="spec-line">
+            <span class="spec-k" data-i18n data-es="ENVÍO:" data-en="SHIPPING:">ENVÍO:</span>
+            <span data-i18n data-es="Argentina &bull; Retiro en Chacarita" data-en="Argentina &bull; Chacarita pickup">Argentina &bull; Retiro en Chacarita</span>
+          </div>
+        </div>
+
+        <div class="merch-full-action">
+          {{ if eq .status_type "soldout" }}
+          <span class="btn-merch disabled" data-i18n data-es="EDICIÓN AGOTADA" data-en="SOLD OUT">EDICIÓN AGOTADA</span>
+          {{ else }}
+          <a href="mailto:{{ site.Params.booking_email }}?subject=Pedido%20Merch%20{{ .code }}%20-%20{{ .title_es }}" class="btn-action">
+            <span data-i18n data-es="SOLICITAR PEDIDO" data-en="PLACE ORDER">SOLICITAR PEDIDO</span>
+            <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  <div class="editorial-nav-footer">
+    <a href="{{ site.Home.RelPermalink }}" class="btn-action">
+      <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+    </a>
+    <a href="{{ "musica/" | relURL }}" class="btn-secondary">
+      <span data-i18n data-es="VER MÚSICA &amp; VINILOS" data-en="VIEW MUSIC &amp; VINYLS">VER MÚSICA &amp; VINILOS</span>
+      <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,122 @@
+{{ define "main" }}
+<div class="epk-page-container">
+  <!-- EPK Header Hero -->
+  <header class="epk-hero">
+    <div class="epk-badge-row">
+      <span class="epk-badge" data-i18n data-es="DOCUMENTO OFICIAL // PROMOTORES &amp; PRENSA" data-en="OFFICIAL DOCUMENT // PROMOTERS &amp; PRESS">DOCUMENTO OFICIAL // PROMOTORES &amp; PRENSA</span>
+      <span class="epk-badge-code">BUF-EPK-2026</span>
+    </div>
+
+    <h1 class="epk-title">DJ BUFALO</h1>
+    <div class="epk-subtitle" data-i18n data-es="DOSSIER DE PRENSA, ESPECIFICACIONES DE PISTA &amp; RIDER TÉCNICO" data-en="PRESS DOSSIER, DANCEFLOOR SPECS &amp; TECHNICAL RIDER">
+      DOSSIER DE PRENSA, ESPECIFICACIONES DE PISTA &amp; RIDER TÉCNICO
+    </div>
+
+    <div class="epk-metrics-bar">
+      <div class="metric-item">
+        <span class="metric-label" data-i18n data-es="ORIGEN" data-en="ORIGIN">ORIGEN</span>
+        <span class="metric-val">CHACARITA, BA</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label" data-i18n data-es="TEMPO" data-en="TEMPO">TEMPO</span>
+        <span class="metric-val num-tabular">124 – 128 BPM</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label" data-i18n data-es="DURACIÓN" data-en="SET LENGTH">DURACIÓN</span>
+        <span class="metric-val" data-i18n data-es="3 HORAS (CIERRE)" data-en="3 HOURS (CLOSE)">3 HORAS (CIERRE)</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label" data-i18n data-es="REPRESENTACIÓN" data-en="REPRESENTATION">REPRESENTACIÓN</span>
+        <span class="metric-val">MANZIA BOOKINGS</span>
+      </div>
+    </div>
+
+    <div class="epk-action-row">
+      <a href="#press-assets" class="btn-action">
+        <span data-i18n data-es="DESCARGAR ASSETS &amp; FOTOS" data-en="DOWNLOAD ASSETS &amp; PHOTOS">DESCARGAR ASSETS &amp; FOTOS</span>
+        <span class="btn-arrow" aria-hidden="true">&darr;</span>
+      </a>
+      <a href="mailto:{{ site.Params.booking_email }}?subject=Booking%20Inquiry%20-%20DJ%20Bufalo" class="btn-secondary">
+        <span data-i18n data-es="SOLICITAR FECHA" data-en="REQUEST BOOKING">SOLICITAR FECHA</span>
+        <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Specs Section -->
+  {{ partial "specs.html" . }}
+
+  <!-- Selected Sets Section -->
+  {{ partial "sets.html" . }}
+
+  <!-- Technical & Hospitality Rider Section -->
+  {{ partial "rider.html" . }}
+
+  <!-- Press Assets & Bio Kit Module -->
+  <section id="press-assets" class="site-section">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n data-es="MATERIAL DE PRENSA &amp; BIO" data-en="PRESS ASSETS &amp; BIO">MATERIAL DE PRENSA &amp; BIO</h2>
+      <div class="section-tagline" data-i18n data-es="TEXTOS OFICIALES PARA FLYERS, PRENSA Y PROGRAMACIÓN &mdash;" data-en="OFFICIAL COPY FOR FLYERS, PRESS &amp; PROGRAMMING &mdash;">TEXTOS OFICIALES PARA FLYERS, PRENSA Y PROGRAMACIÓN &mdash;</div>
+    </div>
+
+    <div class="press-kit-grid">
+      <!-- Short Bio Card -->
+      <div class="press-card">
+        <div class="press-card-header">
+          <span class="press-card-label" data-i18n data-es="BIO CORTA (FLYERS / SOCIALS)" data-en="SHORT BIO (FLYERS / SOCIALS)">BIO CORTA (FLYERS / SOCIALS)</span>
+          <span class="press-words">35 PALABRAS</span>
+        </div>
+        <p class="press-card-body" id="bio-short-text" data-i18n
+           data-es="DJ Bufalo es selector, productor y referente del circuito underground de Buenos Aires. Sesiones largas, hipnóticas y consistentes diseñadas para el cierre de pista. Sin firuletes, sin concesiones. Representado exclusivamente por Manzia Bookings."
+           data-en="DJ Bufalo is selector, producer and Buenos Aires underground club fixture. Long, hypnotic and consistent sets engineered for dancefloor closures. No gimmicks, no requests. Exclusively represented by Manzia Bookings.">
+          DJ Bufalo es selector, productor y referente del circuito underground de Buenos Aires. Sesiones largas, hipnóticas y consistentes diseñadas para el cierre de pista. Sin firuletes, sin concesiones. Representado exclusivamente por Manzia Bookings.
+        </p>
+        <button type="button" class="btn-copy-press" aria-label="Copiar bio corta / Copy short bio">
+          <span data-i18n data-es="COPIAR TEXTO" data-en="COPY TEXT">COPIAR TEXTO</span>
+        </button>
+      </div>
+
+      <!-- Extended Bio Card -->
+      <div class="press-card">
+        <div class="press-card-header">
+          <span class="press-card-label" data-i18n data-es="BIO EDITORIAL COMPLETA" data-en="FULL EDITORIAL BIO">BIO EDITORIAL COMPLETA</span>
+          <span class="press-words">110 PALABRAS</span>
+        </div>
+        <p class="press-card-body" id="bio-full-text" data-i18n
+           data-es="Nacido en la cultura de club porteña y radicado en Chacarita, DJ Bufalo construyó su reputación bajando persianas en los galpones y sótanos más exigentes de Buenos Aires. Su sonido rehúye de los trucos de streaming: sets hipnóticos de tres horas a 126 BPM, construidos con paciencia analógica, sub-graves profundos y respeto absoluto por los que bailan. El búfalo no se explica; su presencia en la cabina es un hecho consumado de la noche porteña. Representación mundial a través de Manzia Bookings."
+           data-en="Born within Buenos Aires club culture and anchored in Chacarita, DJ Bufalo built his reputation closing down the city's most demanding warehouses and basements. His sound rejects streaming shortcuts: hypnotic three-hour sets at 126 BPM, crafted with analog patience, deep sub-bass, and absolute respect for dancers. The buffalo requires no explanation; his booth presence is a solid fact of Buenos Aires nightlife. Worldwide booking representation via Manzia Bookings.">
+          Nacido en la cultura de club porteña y radicado en Chacarita, DJ Bufalo construyó su reputación bajando persianas en los galpones y sótanos más exigentes de Buenos Aires. Su sonido rehúye de los trucos de streaming: sets hipnóticos de tres horas a 126 BPM, construidos con paciencia analógica, sub-graves profundos y respeto absoluto por los que bailan. El búfalo no se explica; su presencia en la cabina es un hecho consumado de la noche porteña. Representación mundial a través de Manzia Bookings.
+        </p>
+        <button type="button" class="btn-copy-press" aria-label="Copiar bio completa / Copy full bio">
+          <span data-i18n data-es="COPIAR TEXTO" data-en="COPY TEXT">COPIAR TEXTO</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Downloads Assets Bar -->
+    <div class="press-downloads-row">
+      <div class="download-card">
+        <div class="download-icon" aria-hidden="true">&darr;</div>
+        <div class="download-info">
+          <div class="download-title" data-i18n data-es="FOTO OFICIAL DE PRENSA (35MM DOCUMENTAL)" data-en="OFFICIAL PRESS PHOTO (35MM DOCUMENTARY)">FOTO OFICIAL DE PRENSA (35MM DOCUMENTAL)</div>
+          <div class="download-meta">WEBP • ALTA RESOLUCIÓN • BUF-019</div>
+        </div>
+        <a href="{{ "images/hero-buffalo-clean.webp" | relURL }}" download class="btn-download">
+          <span data-i18n data-es="DESCARGAR" data-en="DOWNLOAD">DESCARGAR</span>
+        </a>
+      </div>
+
+      <div class="download-card">
+        <div class="download-icon" aria-hidden="true">&darr;</div>
+        <div class="download-info">
+          <div class="download-title" data-i18n data-es="ISOLOGO OFICIAL MANZIA BOOKINGS" data-en="MANZIA BOOKINGS OFFICIAL LOGO">ISOLOGO OFICIAL MANZIA BOOKINGS</div>
+          <div class="download-meta">SVG VECTORIAL • DJ BUFALO + MANZIA BOOKINGS</div>
+        </div>
+        <a href="{{ "images/manzia-bookings-logo.svg" | relURL }}" download class="btn-download">
+          <span data-i18n data-es="DESCARGAR" data-en="DOWNLOAD">DESCARGAR</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

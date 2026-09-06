@@ -1,0 +1,63 @@
+items:
+  - id: buf-019
+    cat_no: "BUF-019"
+    title_es: "LA MIRADA CLAVADA"
+    title_en: "THE LONG STARE"
+    format: "12\" VINILO / DIGITAL"
+    year: "2026"
+    bpm: 126
+    desc_es: "Dos cortes extendidos diseñados para el cierre en galpones porteños. Bajada lenta, percusión analógica seca y sub-graves directos."
+    desc_en: "Two extended club cuts built for Buenos Aires late-night closures. Slow drop, dry analog percussion and direct sub-bass."
+    tracks:
+      - side: "A1"
+        title: "La Mirada Clavada (Club Mix)"
+        duration: "08:42"
+      - side: "B1"
+        title: "Chacarita Nocturna (Dub)"
+        duration: "07:15"
+    status_es: "EN STOCK / TIENDA"
+    status_en: "IN STOCK / STORE"
+    image: "images/sets-feature-historia.webp"
+
+  - id: buf-012
+    cat_no: "BUF-012"
+    title_es: "NUNCA APURA LA BAJADA EP"
+    title_en: "NEVER RUSHES THE DROP EP"
+    format: "12\" VINILO (EDICIÓN LIMITADA 300 COPIAS)"
+    year: "2025"
+    bpm: 125
+    desc_es: "Edición prensada en Buenos Aires. Sonido denso sin artificios. Grabado en vivo en la cabina de Chacarita a las 05:00."
+    desc_en: "Pressed in Buenos Aires. Dense club sound without gimmicks. Recorded live from the Chacarita booth at 05:00."
+    tracks:
+      - side: "A1"
+        title: "Nunca Apura La Bajada"
+        duration: "09:12"
+      - side: "A2"
+        title: "Cero Firuletes"
+        duration: "06:30"
+      - side: "B1"
+        title: "Persiana Abajo"
+        duration: "10:04"
+    status_es: "ÚLTIMAS COPIAS"
+    status_en: "LAST COPIES"
+    image: "images/set-galpon12.webp"
+
+  - id: buf-004
+    cat_no: "BUF-004"
+    title_es: "SESIONES DE TRASNOCHE"
+    title_en: "AFTERHOURS SESSIONS"
+    format: "CASETE C-60 / DIGITAL"
+    year: "2024"
+    bpm: 128
+    desc_es: "Cinta de archivo directo de mesa. Crudo, sin masterizar para streaming, pensado para escuchar de madrugada."
+    desc_en: "Direct soundboard tape archive. Raw, unmastered for streaming, engineered for the early hours."
+    tracks:
+      - side: "LADO A"
+        title: "Galpón 12 Live Excerpt"
+        duration: "29:45"
+      - side: "LADO B"
+        title: "Terraza Sunrise Tool"
+        duration: "30:15"
+    status_es: "AGOTADO / ARCHIVO"
+    status_en: "SOLD OUT / ARCHIVE"
+    image: "images/set-terraza.webp"

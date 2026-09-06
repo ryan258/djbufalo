@@ -1,0 +1,58 @@
+<section id="fechas" class="site-section">
+  <div class="section-header">
+    <h2 class="section-title" data-i18n data-es="PRÓXIMAS FECHAS" data-en="TOUR DATES">PRÓXIMAS FECHAS</h2>
+    <div class="section-tagline" data-i18n data-es="CABINAS Y CIERRES &mdash; BUENOS AIRES &amp; GIRAS" data-en="BOOTHS &amp; CLOSES &mdash; BUENOS AIRES &amp; TOURS">CABINAS Y CIERRES &mdash; BUENOS AIRES &amp; GIRAS</div>
+  </div>
+
+  <div class="fechas-list">
+    {{ $fechas := where site.RegularPages "Section" "fechas" }}
+    {{ range $fechas.ByWeight }}
+    <div class="fecha-row status-{{ .Params.status_type }}" data-id="{{ .File.TranslationBaseName }}">
+      <div class="fecha-date-col">
+        <div class="fecha-day">{{ .Params.date_day }}</div>
+        <div class="fecha-month" data-i18n data-es="{{ .Params.date_month_es }}" data-en="{{ .Params.date_month_en }}">{{ .Params.date_month_es }}</div>
+      </div>
+
+      <div class="fecha-info-col">
+        <a href="{{ .RelPermalink }}" class="fecha-venue-link">
+          <div class="fecha-venue">{{ .Params.venue }}</div>
+        </a>
+        <div class="fecha-location" data-i18n data-es="{{ .Params.location_es }}" data-en="{{ .Params.location_en }}">{{ .Params.location_es }}</div>
+      </div>
+
+      <div class="fecha-time-col">
+        <span class="fecha-time-label" data-i18n data-es="HORARIO:" data-en="SET TIME:">HORARIO:</span>
+        <span class="fecha-time-val num-tabular" data-i18n data-es="{{ .Params.time_es }}" data-en="{{ .Params.time_en }}">{{ .Params.time_es }}</span>
+      </div>
+
+      <div class="fecha-action-col">
+        {{ if eq .Params.status_type "soldout" }}
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Params.venue }} &mdash; AGOTADO">
+          <span data-i18n data-es="AGOTADO" data-en="SOLD OUT">AGOTADO</span>
+          <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        {{ else }}
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-active">
+          <span data-i18n data-es="VER EVENTO" data-en="VIEW EVENT">VER EVENTO</span>
+          <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <div class="section-footer-action">
+    <a href="{{ "fechas/" | relURL }}" class="feature-link">
+      <span data-i18n data-es="VER CALENDARIO COMPLETO Y CONDICIONES" data-en="VIEW FULL SCHEDULE &amp; CONDITIONS">VER CALENDARIO COMPLETO Y CONDICIONES</span>
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
+  <div class="fechas-footer-note">
+    <span class="note-bullet" aria-hidden="true">&bull;</span>
+    <span data-i18n data-es="Horarios estrictos de cabina. Para fechas privadas o fuera de agenda: contactar a Manzia Bookings." data-en="Strict booth schedules. For private dates or unlisted bookings: contact Manzia Bookings.">
+      Horarios estrictos de cabina. Para fechas privadas o fuera de agenda: contactar a Manzia Bookings.
+    </span>
+  </div>
+</section>

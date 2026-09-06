@@ -8,52 +8,52 @@ disableKinds = ['taxonomy', 'term']
 
 [params]
   booking_email = 'booking@djbufalo.com'
-  description = 'DJ Bufalo is a Buenos Aires based selector, producer and cultural figure. Part animal, part myth, fully committed to the night.'
+  description = 'DJ Bufalo es selector, productor y referente cultural de Buenos Aires. Sesiones continuas, hipnóticas y consistentes sin firuletes. Nunca apura la bajada.'
 
 [[menu.main]]
-  identifier = 'home'
-  name = 'INICIO'
-  url = '#home'
+  identifier = 'fechas'
+  name = 'FECHAS'
+  url = 'fechas/'
   weight = 1
   [menu.main.params]
-    name_en = 'HOME'
-
-[[menu.main]]
-  identifier = 'bio'
-  name = 'BIO'
-  url = '#bio'
-  weight = 2
-  [menu.main.params]
-    name_en = 'BIO'
-
-[[menu.main]]
-  identifier = 'specs'
-  name = 'SPECS'
-  url = '#specs'
-  weight = 3
-  [menu.main.params]
-    name_en = 'SPECS'
+    name_en = 'DATES'
 
 [[menu.main]]
   identifier = 'sets'
   name = 'SETS'
-  url = '#sets'
-  weight = 4
+  url = 'sets/'
+  weight = 2
   [menu.main.params]
     name_en = 'SETS'
 
 [[menu.main]]
-  identifier = 'rider'
-  name = 'RIDER'
-  url = '#rider'
-  weight = 5
+  identifier = 'musica'
+  name = 'MÚSICA'
+  url = 'musica/'
+  weight = 3
   [menu.main.params]
-    name_en = 'RIDER'
+    name_en = 'MUSIC'
 
 [[menu.main]]
-  identifier = 'contact'
-  name = 'CONTACTO'
-  url = '#contact'
+  identifier = 'bio'
+  name = 'HISTORIA'
+  url = 'bio/'
+  weight = 4
+  [menu.main.params]
+    name_en = 'LORE'
+
+[[menu.main]]
+  identifier = 'merch'
+  name = 'CÁPSULA'
+  url = 'merch/'
+  weight = 5
+  [menu.main.params]
+    name_en = 'MERCH'
+
+[[menu.main]]
+  identifier = 'newsletter'
+  name = 'DESPACHO'
+  url = '#newsletter'
   weight = 6
   [menu.main.params]
-    name_en = 'CONTACT'
+    name_en = 'DISPATCH'

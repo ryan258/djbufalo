@@ -146,3 +146,37 @@ body {
     }
   }
 }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  background: transparent;
+  color: $color-bone;
+  border: 1px solid $color-border-strong;
+  padding: $space-1 $space-2;
+  font-family: $font-mono;
+  font-size: $type-micro;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0;
+
+  .btn-arrow {
+    font-size: $type-meta;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    border-color: $color-amber;
+    color: $color-amber;
+
+    .btn-arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+

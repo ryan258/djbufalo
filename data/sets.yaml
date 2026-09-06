@@ -38,4 +38,4 @@ feature:
   alt_en: "Here too history is danced"
   link_text_es: "EXPLORAR TODOS LOS SETS"
   link_text_en: "BROWSE ALL SETS"
-  link_url: "#sets"
+  link_url: "sets/"

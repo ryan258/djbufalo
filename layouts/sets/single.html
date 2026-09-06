@@ -1,0 +1,80 @@
+{{ define "main" }}
+<div class="site-section page-sets-archive">
+  <div class="section-header">
+    <div class="archive-cat" data-i18n data-es="ARCHIVO SONORO &bull; TRANSMISIONES EN VIVO" data-en="SOUND ARCHIVE &bull; LIVE BROADCASTS">ARCHIVO SONORO &bull; TRANSMISIONES EN VIVO</div>
+    <h1 class="headline-hero" data-i18n data-es="TODOS LOS SETS &amp; GRABACIONES" data-en="ALL SETS &amp; RECORDINGS">TODOS LOS SETS &amp; GRABACIONES</h1>
+    <div class="section-tagline" data-i18n data-es="GRABADOS EN VIVO DIRECTO DE CABINA &mdash; BUENOS AIRES" data-en="RECORDED LIVE DIRECT FROM THE BOOTH &mdash; BUENOS AIRES">
+      GRABADOS EN VIVO DIRECTO DE CABINA &mdash; BUENOS AIRES
+    </div>
+  </div>
+
+  <div class="archive-intro-box">
+    <p data-i18n
+       data-es="Todas las grabaciones son tomas continuas de tres a cuatro horas, capturadas directo del mixer sin edición posterior. Reproducí las preescuchas sintetizadas en vivo con el motor Web Audio o accedé a los audios completos de archivo."
+       data-en="All recordings are continuous three-to-four hour soundboard feeds captured direct from the mixer with no post-edits. Play live synthesized previews via the Web Audio engine or explore complete archival sessions.">
+      Todas las grabaciones son tomas continuas de tres a cuatro horas, capturadas directo del mixer sin edición posterior. Reproducí las preescuchas sintetizadas en vivo con el motor Web Audio o accedé a los audios completos de archivo.
+    </p>
+  </div>
+
+  <div class="sets-archive-grid">
+    {{ range hugo.Data.sets.items }}
+    <article class="archive-set-card set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" data-audio="{{ printf "audio/%s.mp3" .id | relURL }}">
+      <div class="archive-thumb-wrap">
+        <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
+        <button class="play-btn" type="button" aria-pressed="false" aria-label="Reproducir {{ .title_es }} / Play {{ .title_en }}">
+          <svg viewBox="0 0 24 24">
+            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+          </svg>
+        </button>
+        <span class="set-bpm-badge num-tabular">{{ .bpm }} BPM</span>
+      </div>
+
+      <div class="archive-card-body">
+        <div class="set-meta-line">
+          <span data-i18n data-es="{{ .location_es }}" data-en="{{ .location_en }}">{{ .location_es }}</span>
+          &bull;
+          <span data-i18n data-es="{{ .date_es }}" data-en="{{ .date_en }}">{{ .date_es }}</span>
+        </div>
+
+        <h2 class="archive-set-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h2>
+
+        <div class="archive-set-details">
+          <div class="detail-row">
+            <span class="detail-label" data-i18n data-es="DURACIÓN:" data-en="DURATION:">DURACIÓN:</span>
+            <span class="num-tabular">{{ .duration }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label" data-i18n data-es="FORMATO:" data-en="FORMAT:">FORMATO:</span>
+            <span>WAV / FLAC 24-BIT 96KHZ</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label" data-i18n data-es="CABINA:" data-en="BOOTH:">CABINA:</span>
+            <span>2x CDJ-3000 + DJM-V10</span>
+          </div>
+        </div>
+
+        <div class="archive-card-actions">
+          <a href="https://soundcloud.com/djbufalo" target="_blank" rel="noopener noreferrer" class="btn-archive-listen">
+            <span>SOUNDCLOUD</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="mailto:{{ site.Params.booking_email }}?subject=Solicitud%20Audio%20Set%20{{ .id }}" class="btn-archive-download">
+            <span data-i18n data-es="PEDIR WAV COMPLETO" data-en="REQUEST FULL WAV">PEDIR WAV COMPLETO</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  <div class="editorial-nav-footer">
+    <a href="{{ site.Home.RelPermalink }}" class="btn-action">
+      <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+    </a>
+    <a href="{{ "fechas/" | relURL }}" class="btn-secondary">
+      <span data-i18n data-es="VER PRÓXIMAS FECHAS" data-en="VIEW TOUR DATES">VER PRÓXIMAS FECHAS</span>
+      <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</div>
+{{ end }}

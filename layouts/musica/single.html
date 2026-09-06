@@ -1,0 +1,68 @@
+{{ define "main" }}
+<div class="site-section page-discography">
+  <div class="section-header">
+    <div class="archive-cat" data-i18n data-es="DISCOGRAFÍA &bull; PRENSAJES DE VINILO" data-en="DISCOGRAPHY &bull; VINYL PRESSINGS">DISCOGRAFÍA &bull; PRENSAJES DE VINILO</div>
+    <h1 class="headline-hero" data-i18n data-es="CATÁLOGO MUSICAL &amp; EDICIONES" data-en="MUSIC CATALOG &amp; RELEASES">CATÁLOGO MUSICAL &amp; EDICIONES</h1>
+    <div class="section-tagline" data-i18n data-es="PRENSADO EN BUENOS AIRES &mdash; 180G &amp; DIGITAL" data-en="PRESSED IN BUENOS AIRES &mdash; 180G &amp; DIGITAL">
+      PRENSADO EN BUENOS AIRES &mdash; 180G &amp; DIGITAL
+    </div>
+  </div>
+
+  <div class="discography-grid">
+    {{ range hugo.Data.releases.items }}
+    <article class="disco-card">
+      <div class="disco-cover-wrap">
+        <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
+        <div class="disco-cat-code">{{ .cat_no }}</div>
+        <div class="disco-year num-tabular">{{ .year }}</div>
+      </div>
+
+      <div class="disco-body">
+        <div class="disco-format-line">
+          <span>{{ .format }}</span>
+          <span class="num-tabular">{{ .bpm }} BPM</span>
+        </div>
+
+        <h2 class="disco-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h2>
+        <p class="disco-desc" data-i18n data-es="{{ .desc_es }}" data-en="{{ .desc_en }}">{{ .desc_es }}</p>
+
+        <div class="disco-tracklist">
+          <div class="tracklist-head" data-i18n data-es="TRACKLIST OFICIAL:" data-en="OFFICIAL TRACKLIST:">TRACKLIST OFICIAL:</div>
+          {{ range .tracks }}
+          <div class="disco-track-row">
+            <span class="track-side">{{ .side }}</span>
+            <span class="track-title">{{ .title }}</span>
+            <span class="track-time num-tabular">{{ .duration }}</span>
+          </div>
+          {{ end }}
+        </div>
+
+        <div class="disco-actions">
+          <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="btn-stream">
+            <span>SPOTIFY</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="https://soundcloud.com/djbufalo" target="_blank" rel="noopener noreferrer" class="btn-stream">
+            <span>SOUNDCLOUD</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="mailto:{{ site.Params.booking_email }}?subject=Pedido%20Vinilo%20{{ .cat_no }}" class="btn-vinyl-buy">
+            <span data-i18n data-es="PEDIR VINILO (12&quot;)" data-en="ORDER VINYL (12&quot;)">PEDIR VINILO (12&quot;)</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  <div class="editorial-nav-footer">
+    <a href="{{ site.Home.RelPermalink }}" class="btn-action">
+      <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+    </a>
+    <a href="{{ "merch/" | relURL }}" class="btn-secondary">
+      <span data-i18n data-es="VER CÁPSULA &amp; OBJETOS" data-en="VIEW CAPSULE &amp; MERCH">VER CÁPSULA &amp; OBJETOS</span>
+      <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,162 @@
+{{ define "main" }}
+<article class="site-section page-event-detail">
+  <div class="event-detail-header">
+    <div class="event-badge-bar">
+      <span class="event-badge" data-i18n data-es="FECHA CONFIRMADA // AGENDA MANZIA" data-en="CONFIRMED DATE // MANZIA SCHEDULE">FECHA CONFIRMADA // AGENDA MANZIA</span>
+      <span class="event-code">BUF-EVENTO</span>
+    </div>
+
+    <h1 class="headline-hero event-main-title" data-i18n data-es="{{ .Title }}" data-en="{{ .Params.title_en }}">{{ .Title }}</h1>
+
+    <div class="event-meta-strip">
+      <div class="meta-strip-item">
+        <span class="strip-label" data-i18n data-es="FECHA:" data-en="DATE:">FECHA:</span>
+        <span class="strip-val" data-i18n data-es="{{ .Params.date_full_es }}" data-en="{{ .Params.date_full_en }}">{{ .Params.date_full_es }}</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="strip-label" data-i18n data-es="HORARIO:" data-en="SET TIME:">HORARIO:</span>
+        <span class="strip-val num-tabular" data-i18n data-es="{{ .Params.time_es }}" data-en="{{ .Params.time_en }}">{{ .Params.time_es }}</span>
+      </div>
+      <div class="meta-strip-item">
+        <span class="strip-label" data-i18n data-es="LUGAR:" data-en="VENUE:">LUGAR:</span>
+        <span class="strip-val" data-i18n data-es="{{ .Params.location_es }}" data-en="{{ .Params.location_en }}">{{ .Params.location_es }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="event-grid">
+    <!-- Main Info & Lineup -->
+    <div class="event-main-col">
+      <!-- Venue & Specs Panel -->
+      <div class="event-info-panel">
+        <div class="panel-item">
+          <div class="panel-label" data-i18n data-es="DIRECCIÓN / ACCESO" data-en="ADDRESS / ACCESS">DIRECCIÓN / ACCESO</div>
+          <div class="panel-val" data-i18n data-es="{{ .Params.address_es }}" data-en="{{ .Params.address_en }}">{{ .Params.address_es }}</div>
+        </div>
+
+        <div class="panel-item">
+          <div class="panel-label" data-i18n data-es="HORARIO DE PUERTAS" data-en="DOORS SCHEDULE">HORARIO DE PUERTAS</div>
+          <div class="panel-val" data-i18n data-es="{{ .Params.doors_es }}" data-en="{{ .Params.doors_en }}">{{ .Params.doors_es }}</div>
+        </div>
+
+        <div class="panel-item">
+          <div class="panel-label" data-i18n data-es="SISTEMA DE SONIDO" data-en="SOUND SYSTEM">SISTEMA DE SONIDO</div>
+          <div class="panel-val">{{ .Params.sound_system }}</div>
+        </div>
+
+        <div class="panel-item">
+          <div class="panel-label" data-i18n data-es="AFORO / CAPACIDAD" data-en="CAPACITY">AFORO / CAPACIDAD</div>
+          <div class="panel-val" data-i18n data-es="{{ .Params.capacity_es }}" data-en="{{ .Params.capacity_en }}">{{ .Params.capacity_es }}</div>
+        </div>
+      </div>
+
+      <!-- Lineup & Timetable -->
+      {{ if .Params.lineup }}
+      <div class="event-lineup-section">
+        <h2 class="section-subhead" data-i18n data-es="CRONOGRAMA DE CABINA" data-en="BOOTH TIMETABLE">CRONOGRAMA DE CABINA</h2>
+        <div class="lineup-table">
+          {{ range .Params.lineup }}
+          <div class="lineup-row">
+            <span class="lineup-time num-tabular">{{ .time }}</span>
+            <span class="lineup-artist">{{ .artist }}</span>
+            <span class="lineup-role" data-i18n data-es="{{ .role_es }}" data-en="{{ .role_en }}">{{ .role_es }}</span>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- Event Description -->
+      <div class="event-body-content">
+        <h2 class="section-subhead" data-i18n data-es="DETALLES DE LA FECHA" data-en="EVENT DETAILS">DETALLES DE LA FECHA</h2>
+        <div class="event-prose">
+          {{ .Content }}
+        </div>
+      </div>
+
+      <!-- House Rules -->
+      <div class="event-rules-box">
+        <div class="rules-title" data-i18n data-es="NORMAS DE PISTA &amp; CONVIVENCIA:" data-en="DANCEFLOOR RULES &amp; ETIQUETTE:">NORMAS DE PISTA &amp; CONVIVENCIA:</div>
+        <ul class="rules-list">
+          <li data-i18n data-es="Ingreso únicamente para mayores de 18 años con documento físico." data-en="Admission strictly 18+ with physical ID.">Ingreso únicamente para mayores de 18 años con documento físico.</li>
+          <li data-i18n data-es="Cabina a oscuras. Prohibido usar flash o luces de teléfono en la pista." data-en="Dark booth. No flash photography or phone lights on the dancefloor.">Cabina a oscuras. Prohibido usar flash o luces de teléfono en la pista.</li>
+          <li data-i18n data-es="Cero tolerancia a conductas irrespetuosas. Cuidar al que baila al lado." data-en="Zero tolerance for harassment. Respect fellow dancers.">Cero tolerancia a conductas irrespetuosas. Cuidar al que baila al lado.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Ticket / RSVP Sidebar -->
+    <aside class="event-sidebar-col">
+      <div class="ticket-booking-card status-{{ .Params.status_type }}">
+        <div class="ticket-card-header">
+          <div class="ticket-status-pill" data-i18n data-es="{{ .Params.status_es }}" data-en="{{ .Params.status_en }}">{{ .Params.status_es }}</div>
+          <div class="ticket-date-badge">{{ .Params.date_day }} {{ .Params.date_month_es }}</div>
+        </div>
+
+        <div class="ticket-venue-summary">
+          <div class="summary-name">{{ .Params.venue }}</div>
+          <div class="summary-city" data-i18n data-es="{{ .Params.location_es }}" data-en="{{ .Params.location_en }}">{{ .Params.location_es }}</div>
+          <div class="summary-time num-tabular" data-i18n data-es="{{ .Params.time_es }}" data-en="{{ .Params.time_en }}">{{ .Params.time_es }}</div>
+        </div>
+
+        <div class="ticket-action-wrap">
+          {{ if eq .Params.status_type "active" }}
+          <a href="{{ .Params.ticket_url }}" class="btn-action btn-full-width">
+            <span data-i18n data-es="RESERVAR ENTRADA" data-en="RESERVE TICKET">RESERVAR ENTRADA</span>
+            <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <div class="ticket-disclaimer" data-i18n data-es="Pago por transferencia bancaria o en puerta previa confirmación." data-en="Payment via bank transfer or at door upon confirmation.">
+            Pago por transferencia bancaria o en puerta previa confirmación.
+          </div>
+          {{ else if eq .Params.status_type "door" }}
+          <div class="btn-ticket btn-status-door btn-full-width text-center" data-i18n data-es="VENTA ÚNICAMENTE EN PUERTA" data-en="DOOR TICKETS ONLY">
+            VENTA ÚNICAMENTE EN PUERTA
+          </div>
+          <div class="ticket-disclaimer" data-i18n data-es="Recomendamos llegar puntual a la apertura de puertas para asegurar ingreso." data-en="Arrive early at door opening to guarantee entry.">
+            Recomendamos llegar puntual a la apertura de puertas para asegurar ingreso.
+          </div>
+          {{ else if eq .Params.status_type "soldout" }}
+          <div class="btn-ticket btn-status-soldout btn-full-width text-center" data-i18n data-es="CAPACIDAD AGOTADA" data-en="SOLD OUT">
+            CAPACIDAD AGOTADA
+          </div>
+          <div class="ticket-disclaimer" data-i18n data-es="No se venderán entradas en boletería ni habrá lista de espera." data-en="No tickets will be sold at the box office.">
+            No se venderán entradas en boletería ni habrá lista de espera.
+          </div>
+          {{ else }}
+          <div class="btn-ticket btn-status-soon btn-full-width text-center" data-i18n data-es="PRÓXIMAMENTE EN VENTA" data-en="COMING SOON">
+            PRÓXIMAMENTE EN VENTA
+          </div>
+          <div class="ticket-disclaimer" data-i18n data-es="Registrate al Despacho Nocturno para recibir aviso previo." data-en="Subscribe to Night Dispatch to get early notification.">
+            Registrate al Despacho Nocturno para recibir aviso previo.
+          </div>
+          {{ end }}
+        </div>
+
+        <div class="ticket-agency-seal">
+          <img src="{{ "images/manzia-bookings-logo.svg" | relURL }}" alt="MANZIA Bookings" class="seal-mark">
+          <div class="seal-text">
+            <span>PRODUCCIÓN &amp; RESERVAS</span>
+            <span>MANZIA BOOKINGS</span>
+          </div>
+        </div>
+      </div>
+
+      {{ if .Params.image }}
+      <div class="event-poster-card">
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+        <div class="poster-caption">ARCHIVO &bull; BUENOS AIRES &bull; BUF-019</div>
+      </div>
+      {{ end }}
+    </aside>
+  </div>
+
+  <div class="editorial-nav-footer">
+    <a href="{{ "fechas/" | relURL }}" class="btn-action">
+      <span data-i18n data-es="&larr; TODAS LAS FECHAS" data-en="&larr; ALL TOUR DATES">&larr; TODAS LAS FECHAS</span>
+    </a>
+    <a href="{{ site.Home.RelPermalink }}" class="btn-secondary">
+      <span data-i18n data-es="VOLVER AL INICIO" data-en="RETURN HOME">VOLVER AL INICIO</span>
+    </a>
+  </div>
+</article>
+{{ end }}

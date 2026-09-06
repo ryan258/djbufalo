@@ -1,0 +1,55 @@
+<section id="releases" class="site-section">
+  <div class="section-header">
+    <h2 class="section-title" data-i18n data-es="MÚSICA / DISCOGRAFÍA" data-en="MUSIC / RELEASES">MÚSICA / DISCOGRAFÍA</h2>
+    <div class="section-tagline" data-i18n data-es="CATÁLOGO EN VINILO Y DIGITAL &mdash;" data-en="VINYL &amp; DIGITAL CATALOG &mdash;">CATÁLOGO EN VINILO Y DIGITAL &mdash;</div>
+  </div>
+
+  <div class="releases-grid">
+    {{ range hugo.Data.releases.items }}
+    <article class="release-card" data-cat="{{ .cat_no }}">
+      <div class="release-cover-wrap">
+        <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
+        <div class="release-badge-cat">{{ .cat_no }}</div>
+        <div class="release-badge-year num-tabular">{{ .year }}</div>
+      </div>
+
+      <div class="release-body">
+        <div class="release-meta-top">
+          <span class="release-format">{{ .format }}</span>
+          <span class="release-bpm num-tabular">{{ .bpm }} BPM</span>
+        </div>
+
+        <h3 class="release-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h3>
+
+        <p class="release-desc" data-i18n data-es="{{ .desc_es }}" data-en="{{ .desc_en }}">{{ .desc_es }}</p>
+
+        <div class="release-tracklist">
+          <div class="tracklist-header" data-i18n data-es="CORTES:" data-en="TRACKS:">CORTES:</div>
+          {{ range .tracks }}
+          <div class="release-track-row">
+            <span class="track-side">{{ .side }}</span>
+            <span class="track-name">{{ .title }}</span>
+            <span class="track-dur num-tabular">{{ .duration }}</span>
+          </div>
+          {{ end }}
+        </div>
+
+        <div class="release-footer">
+          <span class="release-status" data-i18n data-es="{{ .status_es }}" data-en="{{ .status_en }}">{{ .status_es }}</span>
+          <a href="{{ "musica/" | relURL }}" class="release-link">
+            <span data-i18n data-es="VER EDICIÓN" data-en="VIEW RELEASE">VER EDICIÓN</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </div>
+
+  <div class="section-footer-action">
+    <a href="{{ "musica/" | relURL }}" class="feature-link">
+      <span data-i18n data-es="EXPLORAR DISCOGRAFÍA COMPLETA" data-en="EXPLORE FULL DISCOGRAPHY">EXPLORAR DISCOGRAFÍA COMPLETA</span>
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</section>

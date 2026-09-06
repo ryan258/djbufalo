@@ -1,12 +1,38 @@
 <header class="site-header">
   <div class="header-inner">
-    <a href="#top" class="brand-logo" aria-label="DJ BUFALO">
+    <a href="{{ site.Home.RelPermalink }}" class="brand-logo" aria-label="DJ BUFALO">
       DJ BUFALO
+      {{ if eq .Type "epk" }}
+      <span class="brand-badge-epk" aria-hidden="true">[EPK]</span>
+      {{ end }}
     </a>
 
     <nav class="main-nav" aria-label="Primary Navigation">
+      {{ if eq .Type "epk" }}
+      <a href="{{ site.Home.RelPermalink }}" class="nav-link nav-back-link" data-i18n data-es="&larr; INICIO" data-en="&larr; HOME">&larr; INICIO</a>
+      <a href="#specs" class="nav-link active" data-i18n data-es="SPECS" data-en="SPECS">SPECS</a>
+      <a href="#sets" class="nav-link" data-i18n data-es="SETS" data-en="SETS">SETS</a>
+      <a href="#rider" class="nav-link" data-i18n data-es="RIDER" data-en="RIDER">RIDER</a>
+      <a href="#press-assets" class="nav-link" data-i18n data-es="DESCARGAS" data-en="ASSETS">DESCARGAS</a>
+      <a href="#contact" class="nav-link" data-i18n data-es="CONTACTO" data-en="CONTACT">CONTACTO</a>
+      {{ else }}
       {{ range site.Menus.main }}
-      <a href="{{ .URL }}" class="nav-link{{ if eq .Identifier "home" }} active{{ end }}" data-i18n data-es="{{ .Name }}" data-en="{{ .Params.name_en }}">{{ .Name }}</a>
+        {{ $link := .URL | relURL }}
+        {{ if strings.HasPrefix .URL "#" }}
+          {{ if not $.IsHome }}
+            {{ $link = printf "%s%s" site.Home.RelPermalink .URL }}
+          {{ else }}
+            {{ $link = .URL }}
+          {{ end }}
+        {{ end }}
+        {{ $isActive := false }}
+        {{ if not (strings.HasPrefix .URL "#") }}
+          {{ if eq $.RelPermalink (.URL | relURL) }}
+            {{ $isActive = true }}
+          {{ end }}
+        {{ end }}
+        <a href="{{ $link }}" class="nav-link{{ if $isActive }} active{{ end }}" data-i18n data-es="{{ .Name }}" data-en="{{ .Params.name_en }}">{{ .Name }}</a>
+      {{ end }}
       {{ end }}
     </nav>
 
