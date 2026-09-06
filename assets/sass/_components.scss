@@ -9,18 +9,18 @@
 .site-header {
   position: relative;
   z-index: 100;
-  padding: 24px 0 16px 0;
+  padding: $space-3 0 $space-2 0;
 
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: $space-3;
 
     @media (max-width: $breakpoint-tablet) {
       flex-wrap: wrap;
       align-items: flex-start;
-      gap: 14px;
+      gap: $space-2;
     }
   }
 
@@ -35,32 +35,32 @@
     line-height: 1;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: $space-1;
   }
 
   .main-nav {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: $space-3;
 
     // ponytail: wraps rather than hides. A drawer only earns its JS if the
     // link count outgrows two rows.
     @media (max-width: $breakpoint-tablet) {
       flex-wrap: wrap;
-      gap: 10px 18px;
+      gap: $space-1 $space-2;
     }
   }
 
   .nav-link {
     font-family: $font-mono;
-    font-size: 11px;
+    font-size: $type-micro;
     font-weight: 700;
     letter-spacing: 0.16em;
     color: $color-bone;
     text-decoration: none;
     text-transform: uppercase;
     position: relative;
-    padding-bottom: 4px;
+    padding-bottom: $space-1;
     transition: color 0.2s ease;
 
     &:hover {
@@ -85,18 +85,18 @@
   .header-meta {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: $space-2;
 
     .lang-switch {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: $space-1;
       font-family: $font-mono;
-      font-size: 11px;
+      font-size: $type-micro;
       letter-spacing: 0.14em;
       font-weight: 700;
       border: 1px solid $color-border;
-      padding: 4px 8px;
+      padding: $space-1;
       background: $color-charcoal-card;
 
       .lang-btn {
@@ -148,8 +148,8 @@
 // ------------------------------------------
 .hero-section {
   position: relative;
-  padding-top: 24px;
-  padding-bottom: 50px;
+  padding-top: $space-3;
+  padding-bottom: $space-5;
   min-height: 480px;
   display: flex;
   align-items: center;
@@ -160,7 +160,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 62%;
+    width: percentage(7 / $grid-columns); // §10 hero: 7 columns imagery
     height: 100%;
     z-index: 1;
     background-size: cover;
@@ -182,53 +182,53 @@
   .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 640px;
+    max-width: cols(5); // §10 hero: 5 columns copy
   }
 
   .hero-catalog {
     font-family: $font-mono;
-    font-size: 11.5px;
+    font-size: $type-meta-sm;
     font-weight: 600;
     line-height: 1.55;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $color-text-dim;
-    margin-bottom: 28px;
+    margin-bottom: $space-3;
   }
 
   .hero-cierre {
     font-family: $font-mono;
-    font-size: 13.5px;
+    font-size: $type-meta;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $color-amber;
-    margin-top: 20px;
-    margin-bottom: 16px;
+    margin-top: $space-3;
+    margin-bottom: $space-2;
   }
 
   .hero-divider {
     width: 36px;
     height: 2px;
     background: $color-amber;
-    margin-bottom: 18px;
+    margin-bottom: $space-2;
   }
 
   .hero-categories {
     font-family: $font-mono;
-    font-size: 11.5px;
+    font-size: $type-meta-sm;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $color-text-dim;
-    margin-bottom: 28px;
+    margin-bottom: $space-4;
   }
 
   // Stamp overlaid on top right
   .hero-stamp-pistas {
     position: absolute;
-    top: 28px;
-    right: 32px;
+    top: $space-3;
+    right: $space-4;
     z-index: 3;
     width: 105px;
     pointer-events: none;
@@ -242,8 +242,8 @@
   // Bottom right stacked motto
   .hero-tag-pista {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: $space-3;
+    right: $space-3;
     z-index: 3;
 
     @media (max-width: $breakpoint-tablet) {
@@ -257,13 +257,13 @@
 // ------------------------------------------
 .bio-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1.35fr 0.75fr;
-  gap: 32px;
+  grid-template-columns: 4fr 5fr 3fr; // §10 editorial: imagery / content / annotations
+  gap: $grid-gutter;
   align-items: start;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: $space-3;
   }
 
   .bio-photo-card {
@@ -287,10 +287,10 @@
 
     .photo-overlay-stamp {
       position: absolute;
-      top: 18px;
-      left: 18px;
+      top: $space-2;
+      left: $space-2;
       font-family: $font-mono;
-      font-size: 11px;
+      font-size: $type-micro;
       font-weight: 700;
       letter-spacing: 0.16em;
       line-height: 1.4;
@@ -300,30 +300,30 @@
   }
 
   .bio-text-col {
-    padding: 6px 0;
+    padding: 0;
 
     .bio-category {
       font-family: $font-mono;
-      font-size: 11px;
+      font-size: $type-micro;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: $color-amber;
-      margin-bottom: 12px;
+      margin-bottom: $space-2;
     }
 
     .bio-divider {
       width: 24px;
       height: 2px;
       background: $color-amber;
-      margin: 18px 0 22px 0;
+      margin: $space-3 0;
     }
   }
 
   .bio-side-card {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: $space-2;
 
     .side-photo-wrap {
       border: 1px solid $color-border;
@@ -360,10 +360,10 @@
 
   .spec-card {
     background: $color-charcoal-card;
-    padding: 28px 24px;
+    padding: $space-4 $space-3;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: $space-2;
     transition: background 0.2s ease;
 
     &:hover {
@@ -373,7 +373,7 @@
     .spec-top {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: $space-2;
 
       .spec-icon {
         width: 24px;
@@ -384,7 +384,7 @@
 
       .spec-label {
         font-family: $font-mono;
-        font-size: 11.5px;
+        font-size: $type-meta-sm;
         font-weight: 600;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -395,7 +395,7 @@
     .spec-value {
       font-family: $font-display;
       font-weight: 900;
-      font-size: 1.7rem;
+      font-size: $type-card;
       letter-spacing: -0.01em;
       line-height: 1.05;
       text-transform: uppercase;
@@ -405,7 +405,7 @@
 
     .spec-sub {
       font-family: $font-mono;
-      font-size: 11px;
+      font-size: $type-micro;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -420,13 +420,13 @@
 // ------------------------------------------
 .sets-layout {
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 36px;
+  grid-template-columns: 8fr 4fr; // §10 grid: list / feature
+  gap: $grid-gutter;
   align-items: start;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: $space-3;
   }
 
   .sets-list {
@@ -439,8 +439,8 @@
     display: grid;
     grid-template-columns: auto auto 1fr auto;
     align-items: center;
-    gap: 18px;
-    padding: 16px 0;
+    gap: $space-2;
+    padding: $space-2 0;
     border-bottom: 1px solid $color-border-subtle;
     text-decoration: none;
     color: inherit;
@@ -470,7 +470,7 @@
 
     .set-thumb {
       width: 72px;
-      height: 44px;
+      height: 40px;
       border: 1px solid $color-border;
       overflow: hidden;
       background: $color-charcoal;
@@ -509,11 +509,11 @@
     .set-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: $space-1;
 
       .set-title {
         font-family: $font-mono;
-        font-size: 14px;
+        font-size: $type-meta;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
@@ -524,7 +524,7 @@
 
       .set-meta {
         font-family: $font-mono;
-        font-size: 11.5px;
+        font-size: $type-meta-sm;
         letter-spacing: 0.1em;
         color: $color-text-dim;
       }
@@ -532,7 +532,7 @@
 
     .set-duration {
       font-family: $font-mono;
-      font-size: 12.5px;
+      font-size: $type-meta;
       letter-spacing: 0.08em;
       color: $color-bone;
     }
@@ -542,7 +542,7 @@
   .sets-feature-wrap {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: $space-2;
 
     .feature-img-card {
       border: 1px solid $color-border;
@@ -559,7 +559,7 @@
 
     .feature-link {
       font-family: $font-mono;
-      font-size: 12px;
+      font-size: $type-meta-sm;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -567,11 +567,11 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: $space-1;
       transition: gap 0.2s ease;
 
       &:hover {
-        gap: 12px;
+        gap: $space-2;
       }
     }
   }
@@ -593,7 +593,7 @@
   }
 
   .rider-col {
-    padding: 28px 32px;
+    padding: $space-4;
 
     & + .rider-col {
       border-left: 1px solid $color-border;
@@ -607,8 +607,8 @@
     .rider-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: $space-2;
+      margin-bottom: $space-3;
 
       .rider-icon {
         width: 20px;
@@ -618,7 +618,7 @@
 
       .rider-title {
         font-family: $font-mono;
-        font-size: 13.5px;
+        font-size: $type-meta;
         font-weight: 700;
         letter-spacing: 0.16em;
         text-transform: uppercase;
@@ -634,9 +634,9 @@
 
       li {
         font-family: $font-mono;
-        font-size: 14px;
+        font-size: $type-meta;
         color: $color-text-secondary;
-        line-height: 1.75;
+        line-height: 1.85;
         letter-spacing: 0.04em;
       }
     }
@@ -645,7 +645,7 @@
   .rider-stamp {
     position: absolute;
     top: 50%;
-    right: -24px;
+    right: -$space-3;
     transform: translateY(-50%) rotate(4deg);
     width: 120px;
     pointer-events: none;
@@ -661,26 +661,26 @@
 // 7. SITE FOOTER
 // ------------------------------------------
 .site-footer {
-  padding: 48px 0 32px 0;
+  padding: $space-5 0 $space-4 0;
   border-top: 1px solid $color-border;
 
   .footer-main {
     display: grid;
-    grid-template-columns: 1.2fr 1.5fr 1fr;
-    gap: 32px;
+    grid-template-columns: 4fr 5fr 3fr; // §10 editorial columns
+    gap: $grid-gutter;
     align-items: center;
-    margin-bottom: 48px;
+    margin-bottom: $space-5;
 
     @media (max-width: $breakpoint-tablet) {
       grid-template-columns: 1fr;
-      gap: 28px;
+      gap: $space-3;
     }
   }
 
   .footer-imprint {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: $space-2;
 
     .manada-mark {
       height: 42px;
@@ -692,11 +692,11 @@
   .footer-contact {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: $space-1;
 
     .contact-title {
       font-family: $font-mono;
-      font-size: 11.5px;
+      font-size: $type-meta-sm;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -713,7 +713,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: $space-1;
       transition: color 0.2s ease;
 
       &:hover {
@@ -726,7 +726,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 24px;
+    gap: $space-3;
 
     @media (max-width: $breakpoint-tablet) {
       justify-content: flex-start;
@@ -735,7 +735,7 @@
     .social-icons {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: $space-2;
 
       a {
         color: $color-bone;
@@ -760,17 +760,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 28px;
+    padding-top: $space-3;
     border-top: 1px solid $color-border-subtle;
     font-family: $font-mono;
-    font-size: 11.5px;
+    font-size: $type-meta-sm;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: $color-text-dim;
 
     @media (max-width: $breakpoint-mobile) {
       flex-direction: column;
-      gap: 10px;
+      gap: $space-1;
       text-align: center;
     }
   }
@@ -788,7 +788,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid $color-border-strong;
-  padding: 12px 24px;
+  padding: $space-2 $space-3;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -803,7 +803,7 @@
   .player-info {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: $space-2;
 
     .player-indicator {
       width: 8px;
@@ -815,7 +815,7 @@
 
     .player-track-name {
       font-family: $font-mono;
-      font-size: 11.5px;
+      font-size: $type-meta-sm;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -826,15 +826,15 @@
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: $space-2;
 
     .player-toggle-btn {
       background: $color-amber;
       color: $color-obsidian;
       border: none;
-      padding: 6px 14px;
+      padding: $space-1 $space-2;
       font-family: $font-mono;
-      font-size: 10.5px;
+      font-size: $type-micro;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -845,7 +845,7 @@
       background: transparent;
       color: $color-text-dim;
       border: none;
-      font-size: 16px;
+      font-size: $space-2;
       cursor: pointer;
 
       &:hover {

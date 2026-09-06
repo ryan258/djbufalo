@@ -15,7 +15,7 @@ body {
 .headline-hero {
   font-family: $font-display;
   font-weight: 900;
-  font-size: clamp(4.4rem, 8.2vw, 6.4rem);
+  font-size: clamp($type-hero-min, 8.2vw, $type-hero-max);
   line-height: 0.88;
   letter-spacing: -0.015em;
   text-transform: uppercase;
@@ -29,7 +29,7 @@ body {
   font-weight: 500;
   color: $color-bone;
   line-height: 1.25;
-  margin: 14px 0 0 0;
+  margin: $space-2 0 0 0;
   letter-spacing: -0.01em;
 }
 
@@ -38,13 +38,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 24px;
+  margin-bottom: $space-3;
   border-bottom: 1px solid $color-border-subtle;
-  padding-bottom: 12px;
+  padding-bottom: $space-1;
 
   .section-title {
     font-family: $font-mono;
-    font-size: 13.5px;
+    font-size: $type-meta;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -54,7 +54,7 @@ body {
 
   .section-tagline {
     font-family: $font-mono;
-    font-size: 11.5px;
+    font-size: $type-meta-sm;
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -66,18 +66,18 @@ body {
 .headline-condensed {
   font-family: $font-display;
   font-weight: 900;
-  font-size: clamp(2.3rem, 4.2vw, 3.4rem);
+  font-size: clamp($type-h2-min, 4.2vw, $type-h2-max);
   line-height: 0.92;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: $color-bone;
-  margin: 0 0 18px 0;
+  margin: 0 0 $space-2 0;
 }
 
 // Stacked Vertical Text Blocks (Buenos Aires texture: 11px floor)
 .stacked-tag {
   font-family: $font-mono;
-  font-size: 11px;
+  font-size: $type-micro;
   line-height: 1.45;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -91,7 +91,7 @@ body {
     width: 20px;
     height: 1px;
     background: $color-text-dim;
-    margin-top: 8px;
+    margin-top: $space-1;
   }
 
   &.text-right {
@@ -109,10 +109,10 @@ body {
 // Paragraphs (15.5px, max-width ~62ch)
 p {
   color: $color-text-secondary;
-  font-size: 15.5px;
+  font-size: $type-body;
   line-height: 1.65;
   max-width: 62ch;
-  margin: 0 0 16px 0;
+  margin: 0 0 $space-2 0;
 
   &:last-child {
     margin-bottom: 0;

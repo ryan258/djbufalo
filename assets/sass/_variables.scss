@@ -1,13 +1,16 @@
 // ==========================================
 // DJ BUFALO DESIGN SYSTEM — Tokens
-// Based on design-system.md
+// Source of truth: style-guide.md (Brand Style Guide v1.0)
 // ==========================================
 
-// Color Palette
-$color-obsidian: #0B0B0A;
-$color-bone: #F1EDE4;
-$color-amber: #E8A33A;
-$color-charcoal: #1A1917;
+// -- §4 Color System -----------------------
+$color-obsidian: #0B0B0A;        // Primary Background
+$color-bone: #F1EDE4;            // Primary Light
+$color-charcoal: #1A1917;        // Secondary Dark — panels, cards, separation
+$color-amber: #E8A33A;           // Signature Accent — navigation, labels, key info
+$color-violet: #7668FF;          // Unexpected Accent — handwritten intervention, rare
+
+// Charcoal derivatives for card surfaces and hover elevation
 $color-charcoal-card: #141312;
 $color-charcoal-elevated: #22211E;
 
@@ -17,24 +20,56 @@ $color-text-secondary: #AAA69E;
 $color-text-dim: #7C7870;
 $color-text-faint: #524F48;
 
-// Borders & Grid lines
+// Borders & grid lines (§9 "thin rules")
 $color-border: rgba(241, 237, 228, 0.12);
 $color-border-strong: rgba(241, 237, 228, 0.22);
 $color-border-subtle: rgba(241, 237, 228, 0.06);
 
-// Typography Stacks
-$font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-display: 'Barlow Condensed', 'Archivo', sans-serif;
-$font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+// -- §5 Typography -------------------------
+// Roles are locked even if production families change.
+$font-display: 'Barlow Condensed', 'Archivo', sans-serif;              // heavy condensed grotesk
+$font-sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; // contemporary grotesk
+$font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;              // utility
 
-// Layout Grid & Sizing (Numeric Layout System)
-// design-system.md locks 1080px of *content* and a 72px minimum outer margin.
-// box-sizing is border-box, so the wrap has to carry the padding on top of
-// 1080px — otherwise the padding eats the content width down to 984px.
-$container-max-width: 1080px;
-$container-padding: 72px;
-$container-padding-tablet: 40px;
-$container-padding-mobile: 20px;
+// Desktop size baselines
+$type-hero-min: 4.4rem;      // mobile floor
+$type-hero-max: 6.4rem;      // 102.4px — within 88–104px
+$type-h2-min: 2.3rem;        // mobile floor
+$type-h2-max: 3.25rem;       // 52px — top of the 42–52px band
+$type-card: 1.7rem;          // 27.2px — within 24–30px
+$type-body: 15.5px;          // within 15–17px
+$type-meta: 13px;            // top of the 11–13px band
+$type-meta-sm: 11.5px;
+$type-micro: 11px;           // floor is 10px
+
+// -- §11 Spacing System --------------------
+// 8 / 16 / 24 / 32 / 48 / 64 / 96 / 120. No arbitrary gaps.
+$space-1: 8px;
+$space-2: 16px;
+$space-3: 24px;
+$space-4: 32px;
+$space-5: 48px;
+$space-6: 64px;
+$space-7: 96px;
+$space-8: 120px;
+
+$space-section: $space-8;        // §10 Section spacing
+$space-module: $space-6;         // §10 Major module spacing
+
+// -- §10 Layout System ---------------------
+$container-max-width: 1080px;    // within the 1060–1120px band
+$container-padding: 72px;        // minimum outer margin
+$container-padding-tablet: $space-4;
+$container-padding-mobile: 20px; // below the tablet breakpoint the 72px rule lapses
+
+$grid-columns: 12;
+$grid-gutter: $space-3;          // 24px
+
+// Width of n columns inside the 1080px content area, gutters included.
+@function cols($n) {
+  $col: ($container-max-width - ($grid-gutter * ($grid-columns - 1))) / $grid-columns;
+  @return ($col * $n) + ($grid-gutter * ($n - 1));
+}
 
 // Breakpoints
 $breakpoint-desktop: 1120px;

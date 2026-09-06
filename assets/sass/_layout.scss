@@ -70,16 +70,26 @@ body {
 // Section Scaffolding (100–120px vertical spacing system)
 .site-section {
   position: relative;
-  padding-top: 96px;
-  padding-bottom: 96px;
+
+  // §10 Section spacing is the gap BETWEEN sections, so it lives on one edge —
+  // symmetric padding would stack to 240px and read as a void, not as rhythm.
+  padding-top: $space-section;
+  padding-bottom: 0;
+
+  &:last-of-type {
+    padding-bottom: $space-section;
+  }
 
   &.border-top {
     border-top: 1px solid $color-border;
   }
 
   @media (max-width: $breakpoint-tablet) {
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding-top: $space-6;
+
+    &:last-of-type {
+      padding-bottom: $space-6;
+    }
   }
 }
 
@@ -87,13 +97,13 @@ body {
 .btn-action {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: $space-1;
   background: transparent;
   color: $color-bone;
   border: 1px solid $color-border-strong;
-  padding: 10px 18px;
+  padding: $space-1 $space-2;
   font-family: $font-mono;
-  font-size: 11px;
+  font-size: $type-micro;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -103,7 +113,7 @@ body {
   border-radius: 0;
 
   .btn-arrow {
-    font-size: 13px;
+    font-size: $type-meta;
     transition: transform 0.2s ease;
   }
 
