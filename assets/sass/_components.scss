@@ -85,26 +85,26 @@
   .header-meta {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: $space-3;
 
     .lang-switch {
       display: inline-flex;
       align-items: center;
-      gap: $space-1;
+      gap: 4px;
       font-family: $font-mono;
       font-size: $type-micro;
       letter-spacing: 0.14em;
       font-weight: 700;
-      border: 1px solid $color-border;
-      padding: $space-1;
-      background: $color-charcoal-card;
+      border: none;
+      padding: 0;
+      background: transparent;
 
       .lang-btn {
         background: transparent;
         border: none;
         color: $color-text-dim;
         cursor: pointer;
-        padding: 0 2px;
+        padding: 0;
         font-family: inherit;
         font-size: inherit;
         font-weight: inherit;
@@ -124,19 +124,12 @@
       .lang-sep {
         color: $color-text-faint;
         user-select: none;
+        padding: 0 2px;
       }
     }
 
-    .header-globe {
-      width: 26px;
-      height: 26px;
-      color: $color-bone;
-      opacity: 0.85;
-    }
-
     @media (max-width: $breakpoint-tablet) {
-      .stacked-tag,
-      .header-globe {
+      .stacked-tag {
         display: none;
       }
     }
@@ -203,14 +196,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $color-amber;
-    margin-top: $space-3;
-    margin-bottom: $space-2;
-  }
-
-  .hero-divider {
-    width: 36px;
-    height: 2px;
-    background: $color-amber;
+    margin-top: $space-2;
     margin-bottom: $space-2;
   }
 
@@ -218,7 +204,7 @@
     font-family: $font-mono;
     font-size: $type-meta-sm;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: $color-text-dim;
     margin-bottom: $space-4;
@@ -312,11 +298,8 @@
       margin-bottom: $space-2;
     }
 
-    .bio-divider {
-      width: 24px;
-      height: 2px;
-      background: $color-amber;
-      margin: $space-3 0;
+    p {
+      margin-bottom: $space-3;
     }
   }
 
@@ -346,12 +329,13 @@
 .specs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: $color-border;
-  border: 1px solid $color-border;
+  gap: $space-3;
+  background: transparent;
+  border: none;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: repeat(2, 1fr);
+    gap: $space-2;
   }
 
   @media (max-width: $breakpoint-mobile) {
@@ -360,14 +344,16 @@
 
   .spec-card {
     background: $color-charcoal-card;
-    padding: $space-4 $space-3;
+    border: 1px solid $color-border;
+    padding: $space-3;
     display: flex;
     flex-direction: column;
     gap: $space-2;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 
     &:hover {
       background: $color-charcoal-elevated;
+      border-color: $color-border-strong;
     }
 
     .spec-top {
@@ -409,7 +395,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: $color-text-faint;
+      color: $color-text-dim; // real copy — text-faint is for separators only
       margin: 0;
     }
   }
@@ -420,13 +406,17 @@
 // ------------------------------------------
 .sets-layout {
   display: grid;
-  grid-template-columns: 8fr 4fr; // §10 grid: list / feature
+  grid-template-columns: 8fr 4fr; // §10 grid: list / secondary imagery
   gap: $grid-gutter;
   align-items: start;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
     gap: $space-3;
+  }
+
+  .sets-col-left .feature-link {
+    margin-top: $space-3;
   }
 
   .sets-list {
@@ -437,14 +427,20 @@
 
   .set-row {
     display: grid;
-    grid-template-columns: auto auto 1fr auto;
+    grid-template-columns: auto auto 1fr auto auto;
     align-items: center;
     gap: $space-2;
     padding: $space-2 0;
     border-bottom: 1px solid $color-border-subtle;
-    text-decoration: none;
-    color: inherit;
-    transition: background 0.15s ease;
+    cursor: pointer; // the row toggles playback; .play-btn carries the keyboard path
+
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: auto auto 1fr auto;
+
+      .set-more {
+        display: none;
+      }
+    }
 
     &:hover {
       .set-thumb img {
@@ -469,8 +465,8 @@
     }
 
     .set-thumb {
-      width: 72px;
-      height: 40px;
+      width: 68px;
+      height: 42px;
       border: 1px solid $color-border;
       overflow: hidden;
       background: $color-charcoal;
@@ -509,7 +505,7 @@
     .set-info {
       display: flex;
       flex-direction: column;
-      gap: $space-1;
+      gap: 2px;
 
       .set-title {
         font-family: $font-mono;
@@ -537,42 +533,51 @@
       color: $color-bone;
     }
 
+    .set-more {
+      font-family: $font-mono;
+      font-size: $type-meta;
+      color: $color-text-faint;
+      letter-spacing: 0.16em;
+      padding: 0 $space-1;
+      user-select: none;
+    }
   }
 
-  .sets-feature-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: $space-2;
+  .feature-img-card {
+    border: 1px solid $color-border;
+    overflow: hidden;
+    background: $color-charcoal;
 
-    .feature-img-card {
-      border: 1px solid $color-border;
-      overflow: hidden;
-      background: $color-charcoal;
+    img {
+      width: 100%;
+      display: block;
+      filter: contrast(1.1) brightness(0.95);
 
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        filter: contrast(1.1) brightness(0.95);
-      }
+      // ponytail: the source webp is a 246x173 mockup screenshot with a fake
+      // "BROWSE ALL SETS" CTA baked into its bottom 32%. Cropping to the
+      // photograph is the cheap fix; replace the asset with a clean 2x export
+      // (it is still upscaled) and this rule can go.
+      aspect-ratio: 246 / 119;
+      object-fit: cover;
+      object-position: top;
     }
+  }
 
-    .feature-link {
-      font-family: $font-mono;
-      font-size: $type-meta-sm;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: $color-amber;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: $space-1;
-      transition: gap 0.2s ease;
+  .feature-link {
+    font-family: $font-mono;
+    font-size: $type-meta-sm;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: $color-amber;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    transition: gap 0.2s ease;
 
-      &:hover {
-        gap: $space-2;
-      }
+    &:hover {
+      gap: $space-2;
     }
   }
 }
@@ -584,24 +589,21 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border: 1px solid $color-border;
-  background: $color-charcoal-card;
+  gap: $space-3;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
+    gap: $space-2;
   }
 
   .rider-col {
+    background: $color-charcoal-card;
+    border: 1px solid $color-border;
     padding: $space-4;
+    transition: border-color 0.2s ease;
 
-    & + .rider-col {
-      border-left: 1px solid $color-border;
-
-      @media (max-width: $breakpoint-tablet) {
-        border-left: none;
-        border-top: 1px solid $color-border;
-      }
+    &:hover {
+      border-color: $color-border-strong;
     }
 
     .rider-header {
@@ -642,14 +644,23 @@
     }
   }
 
+  // §10: violet handwriting is one of the three things allowed to break the grid.
   .rider-stamp {
     position: absolute;
     top: 50%;
-    right: -$space-3;
-    transform: translateY(-50%) rotate(4deg);
-    width: 120px;
+    right: -$space-7;
+    transform: translateY(-50%);
+    width: 140px;
+    height: auto;
     pointer-events: none;
     z-index: 5;
+
+    // Narrower than this and the 72px outer margin can no longer absorb a 96px
+    // overhang, so the stamp tucks back inside instead of clipping.
+    @media (max-width: $breakpoint-wide) {
+      right: -$space-2;
+      opacity: 0.9;
+    }
 
     @media (max-width: $breakpoint-desktop) {
       display: none;
