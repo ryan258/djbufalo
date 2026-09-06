@@ -1,0 +1,34 @@
+# Hugo output and generated caches
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Design mocks & raw prototypes
+mocks/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor & IDE Directories
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node / NPM (if used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python cache & temporary files
+__pycache__/
+*.py[cod]
+*$py.class
