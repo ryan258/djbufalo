@@ -51,6 +51,9 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
+      - name: Check asset URLs survive a subpath baseURL
+        run: ./scripts/check-subpath.sh
+
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:

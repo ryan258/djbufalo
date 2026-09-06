@@ -7,7 +7,7 @@ items:
     date_es: "26 Sep 2023"
     date_en: "26 Sep 2023"
     duration: "04:17:08"
-    image: "/images/set-galpon12.webp"
+    image: "images/set-galpon12.webp"
     bpm: 126
 
   - id: manzia-night
@@ -18,7 +18,7 @@ items:
     date_es: "03 Jun 2023"
     date_en: "03 Jun 2023"
     duration: "03:58:21"
-    image: "/images/set-manada.webp"
+    image: "images/set-manada.webp"
     bpm: 125
 
   - id: cierre-terraza
@@ -29,11 +29,11 @@ items:
     date_es: "14 Ene 2023"
     date_en: "14 Jan 2023"
     duration: "04:02:11"
-    image: "/images/set-terraza.webp"
+    image: "images/set-terraza.webp"
     bpm: 128
 
 feature:
-  image: "/images/sets-feature-historia.webp"
+  image: "images/sets-feature-historia.webp"
   alt_es: "Aquí también se baila historia"
   alt_en: "Here too history is danced"
   link_text_es: "EXPLORAR TODOS LOS SETS"
