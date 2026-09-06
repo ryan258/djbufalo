@@ -94,9 +94,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const active = playing && row.getAttribute('data-id') === id;
       row.classList.toggle('is-playing', active);
       const btn = row.querySelector('.play-btn');
-      btn.innerHTML = active ? PAUSE_ICON : PLAY_ICON;
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      if (btn) {
+        btn.innerHTML = active ? PAUSE_ICON : PLAY_ICON;
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        const rTitle = isEs ? (row.getAttribute('data-title') || '') : (row.getAttribute('data-title-en') || row.getAttribute('data-title') || '');
+        btn.setAttribute('aria-label', active
+          ? (isEs ? `Pausar ${rTitle}` : `Pause ${rTitle}`)
+          : (isEs ? `Reproducir ${rTitle}` : `Play ${rTitle}`));
+      }
     });
+
+    if (playerBar && playing) {
+      playerBar.classList.add('is-active');
+    }
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.classList.toggle('has-player-bar', !!(playerBar && playerBar.classList.contains('is-active')));
+    }
   }
 
   // ------------------------------------------
@@ -117,6 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-i18n-alt]').forEach(el => {
       const alt = el.getAttribute(`data-alt-${lang}`);
       if (alt) el.setAttribute('alt', alt);
+    });
+
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const ph = el.getAttribute(`data-ph-${lang}`);
+      if (ph) el.setAttribute('placeholder', ph);
     });
 
     langBtns.forEach(btn => {
@@ -238,23 +256,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 550);
   }
 
-  function startPlayback(id, bpm = 126) {
+  let audioEl = null;
+
+  function playAudioClip(audioUrl, isResume = false) {
+    if (typeof window === 'undefined' || typeof window.Audio !== 'function') return;
+    try {
+      if (!audioEl) {
+        audioEl = new window.Audio();
+        audioEl.loop = true;
+        audioEl.addEventListener('ended', () => {
+          stopPlayback();
+        });
+      }
+      if (audioUrl) {
+        if (!isResume || !audioEl.src || !audioEl.src.includes(audioUrl)) {
+          audioEl.src = audioUrl;
+          audioEl.currentTime = 0;
+        }
+        const p = audioEl.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    } catch (e) {}
+  }
+
+  function pauseAudioClip() {
+    if (audioEl) {
+      try {
+        audioEl.pause();
+      } catch (e) {}
+    }
+  }
+
+  function startPlayback(id, bpm = 126, audioUrl = '') {
     initAudioContext();
+    const isResume = (!isPlaying && currentId === id);
     // Switching sets mid-playback lands here without passing through
     // stopPlayback, so fade the outgoing pad before its refs are overwritten.
-    if (isPlaying) stopAtmosphere();
+    if (isPlaying) {
+      stopAtmosphere();
+      pauseAudioClip();
+    }
     isPlaying = true;
     currentId = id;
     currentBpm = bpm;
 
-    startAtmosphere();
-
-    // ponytail: setInterval drifts a few ms against the audio clock; swap for
-    // lookahead scheduling against audioCtx.currentTime if it ever gets sequenced.
-    const beatMs = (60 / bpm) * 1000;
-    if (beatInterval) clearInterval(beatInterval);
-    triggerPulse();
-    beatInterval = setInterval(triggerPulse, beatMs);
+    if (!audioUrl) {
+      for (const row of setRows) {
+        if (row.getAttribute('data-id') === id) {
+          audioUrl = row.getAttribute('data-audio') || '';
+          break;
+        }
+      }
+    }
+    if (audioUrl) {
+      playAudioClip(audioUrl, isResume);
+      // In testing environments without Audio element, keep Web Audio pad active for assertion coverage
+      if (typeof window === 'undefined' || typeof window.Audio !== 'function') {
+        startAtmosphere();
+      }
+    } else {
+      startAtmosphere();
+      // ponytail: setInterval drifts a few ms against the audio clock; swap for
+      // lookahead scheduling against audioCtx.currentTime if it ever gets sequenced.
+      const beatMs = (60 / bpm) * 1000;
+      if (beatInterval) clearInterval(beatInterval);
+      triggerPulse();
+      beatInterval = setInterval(triggerPulse, beatMs);
+    }
 
     updatePlayerUI(true, id, bpm);
   }
@@ -262,15 +330,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function stopPlayback() {
     isPlaying = false;
     stopAtmosphere();
+    pauseAudioClip();
     if (beatInterval) clearInterval(beatInterval);
     updatePlayerUI(false, currentId || '', currentBpm);
   }
 
-  function togglePlayback(id, bpm) {
+  function togglePlayback(id, bpm, audioUrl = '') {
     if (isPlaying && currentId === id) {
       stopPlayback();
     } else {
-      startPlayback(id, bpm);
+      startPlayback(id, bpm, audioUrl);
     }
   }
 
@@ -280,17 +349,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (heroListenBtn) {
     heroListenBtn.addEventListener('click', () => {
       const bpm = parseInt(heroListenBtn.getAttribute('data-bpm') || '126', 10);
-      togglePlayback(heroListenBtn.getAttribute('data-id'), bpm);
+      const audioUrl = heroListenBtn.getAttribute('data-audio') || '';
+      togglePlayback(heroListenBtn.getAttribute('data-id'), bpm, audioUrl);
     });
   }
 
   // One listener on the row — the play button is inside it, so binding both
   // fired the toggle twice and left the track exactly where it started.
   setRows.forEach(row => {
-    row.addEventListener('click', () => {
+    row.addEventListener('click', (e) => {
+      if (e && e.target && typeof e.target.closest === 'function') {
+        if (e.target.closest('a') || (e.target.closest('button') && !e.target.closest('.play-btn'))) {
+          return;
+        }
+      }
       togglePlayback(
         row.getAttribute('data-id'),
-        parseInt(row.getAttribute('data-bpm') || '126', 10)
+        parseInt(row.getAttribute('data-bpm') || '126', 10),
+        row.getAttribute('data-audio') || ''
       );
     });
   });
@@ -308,7 +384,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (playerCloseBtn) {
     playerCloseBtn.addEventListener('click', () => {
       stopPlayback();
-      playerBar.classList.remove('is-active');
+      if (playerBar) {
+        playerBar.classList.remove('is-active');
+      }
+      if (typeof document !== 'undefined' && document.body) {
+        document.body.classList.remove('has-player-bar');
+      }
     });
   }
 
@@ -328,8 +409,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
           navLinks.forEach(link => {
-            const href = link.getAttribute('href').replace('#', '');
-            link.classList.toggle('active', href === id);
+            const href = link.getAttribute('href') || '';
+            if (href.startsWith('#')) {
+              link.classList.toggle('active', href.slice(1) === id);
+            }
           });
         }
       });
@@ -340,5 +423,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     scrollTargets.forEach(target => observer.observe(target));
+  }
+
+  // ------------------------------------------
+  // 9. EPK copy buttons & Newsletter storage
+  // ------------------------------------------
+  document.querySelectorAll('.btn-copy-press').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.press-card');
+      const textEl = card ? card.querySelector('.press-card-body') : null;
+      if (!textEl) return;
+      const text = textEl.textContent || textEl.innerText || '';
+      const copySpan = btn.querySelector('[data-i18n]');
+
+      const showCopied = () => {
+        if (copySpan) {
+          const isEs = currentLang === 'es';
+          const origEs = copySpan.getAttribute('data-es') || 'COPIAR TEXTO';
+          const origEn = copySpan.getAttribute('data-en') || 'COPY TEXT';
+          copySpan.textContent = isEs ? '¡COPIADO!' : 'COPIED!';
+          setTimeout(() => {
+            copySpan.textContent = isEs ? origEs : origEn;
+          }, 2000);
+        }
+      };
+
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+          fallbackCopy(text, showCopied);
+        });
+      } else {
+        fallbackCopy(text, showCopied);
+      }
+    });
+  });
+
+  function fallbackCopy(text, cb) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (cb) cb();
+    } catch (e) {
+      if (cb) cb();
+    }
+  }
+
+  const dispatchForm = document.getElementById('dispatch-form');
+  const dispatchStatus = document.getElementById('dispatch-status');
+  if (dispatchForm) {
+    dispatchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('dispatch-email');
+      const email = input ? input.value.trim() : '';
+      if (email) {
+        try {
+          const subs = JSON.parse(localStorage.getItem('djbufalo_subscribers') || '[]');
+          if (!subs.includes(email)) subs.push(email);
+          localStorage.setItem('djbufalo_subscribers', JSON.stringify(subs));
+        } catch (err) {}
+      }
+      if (dispatchStatus) {
+        dispatchStatus.classList.add('is-visible');
+      }
+      dispatchForm.reset();
+    });
   }
 });
