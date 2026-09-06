@@ -5,7 +5,7 @@
 set -euo pipefail
 out=$(mktemp -d)
 hugo --quiet --destination "$out" --baseURL "https://example.com/subpath/"
-if bad=$(grep -rhoE '(src|href)="?/[^ ">]*|url\(/[^)]*\)' "$out"/index.html | grep -v '/subpath/'); then
+if bad=$(find "$out" -name "*.html" -exec grep -rhoE '(src|href|srcset)="?/[^ ">]*|url\(['\''"]?/[^)'\''"]*['\''"]?\)' {} + | grep -v '/subpath/'); then
   echo "::error::asset URL(s) bypassed the baseURL subpath:"
   echo "$bad" | sed 's/^/  /'
   exit 1

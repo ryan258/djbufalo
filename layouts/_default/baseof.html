@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ .Site.Params.description }}">
+  {{ $pageTitle := cond .IsHome site.Title (printf "%s — DJ BUFALO" .Title) }}
+  {{ $pageDesc := .Params.description | default site.Params.description }}
+  <title>{{ $pageTitle }}</title>
+  <meta name="description" content="{{ $pageDesc }}">
   <meta name="theme-color" content="#0B0B0A">
   <meta name="color-scheme" content="dark">
 
@@ -15,8 +17,8 @@
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ .Site.Title }}">
-  <meta property="og:description" content="{{ .Site.Params.description }}">
+  <meta property="og:title" content="{{ $pageTitle }}">
+  <meta property="og:description" content="{{ $pageDesc }}">
   <meta property="og:image" content="{{ "images/hero-buffalo-clean.webp" | absURL }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta name="twitter:card" content="summary_large_image">
@@ -43,10 +45,10 @@
   </div>
 
   <!-- Interactive Audio Bar -->
-  <div id="audio-player-bar" class="audio-controller-bar" aria-live="polite">
+  <div id="audio-player-bar" class="audio-controller-bar">
     <div class="player-info">
       <div class="player-indicator"></div>
-      <div id="player-track-display" class="player-track-name"></div>
+      <div id="player-track-display" class="player-track-name" aria-live="polite"></div>
     </div>
     <div class="player-controls">
       <button id="player-toggle-btn" class="player-toggle-btn" type="button">PAUSAR</button>

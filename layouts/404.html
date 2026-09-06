@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="site-section page-editorial text-center" style="padding: 6rem 1rem; max-width: 720px; margin: 0 auto;">
+  <div class="editorial-cat" data-i18n data-es="COORDENADA PERDIDA // ERROR 404" data-en="LOST COORDINATES // 404 ERROR">COORDENADA PERDIDA // ERROR 404</div>
+  <h1 class="headline-hero" style="font-size: 5rem; line-height: 1; margin: 1rem 0;" data-i18n data-es="PISTA VACÍA." data-en="EMPTY FLOOR.">
+    PISTA VACÍA.
+  </h1>
+  <p class="editorial-lead" data-i18n
+     data-es="La página que buscás no existe o fue levantada después de las 04:00. Las sesiones de DJ Bufalo no dejan rastros innecesarios."
+     data-en="The requested page does not exist or was closed down after 04:00. DJ Bufalo sessions leave no stray coordinates behind.">
+    La página que buscás no existe o fue levantada después de las 04:00. Las sesiones de DJ Bufalo no dejan rastros innecesarios.
+  </p>
+  <div class="editorial-nav-footer" style="justify-content: center; margin-top: 2.5rem; gap: 1rem;">
+    <a href="{{ site.Home.RelPermalink }}" class="btn-action">
+      <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+    </a>
+    <a href="{{ "sets/" | relURL }}" class="btn-secondary">
+      <span data-i18n data-es="ESCUCHAR SETS" data-en="LISTEN TO SETS">ESCUCHAR SETS</span>
+      <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</section>
+{{ end }}
