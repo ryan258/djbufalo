@@ -107,8 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playerBar && playing) {
       playerBar.classList.add('is-active');
     }
+    const barVisible = Boolean(playerBar && playerBar.classList.contains('is-active'));
+    if (playerBar) {
+      playerBar.inert = !barVisible;
+      playerBar.setAttribute('aria-hidden', barVisible ? 'false' : 'true');
+    }
     if (typeof document !== 'undefined' && document.body) {
-      document.body.classList.toggle('has-player-bar', !!(playerBar && playerBar.classList.contains('is-active')));
+      document.body.classList.toggle('has-player-bar', barVisible);
     }
   }
 
@@ -290,6 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function startPlayback(id, bpm = 126, audioUrl = '') {
     initAudioContext();
     const isResume = (!isPlaying && currentId === id);
+    if (beatInterval) {
+      clearInterval(beatInterval);
+      beatInterval = null;
+    }
     // Switching sets mid-playback lands here without passing through
     // stopPlayback, so fade the outgoing pad before its refs are overwritten.
     if (isPlaying) {
@@ -385,7 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
     playerCloseBtn.addEventListener('click', () => {
       stopPlayback();
       if (playerBar) {
+        if (playerBar.contains(document.activeElement)) {
+          const row = [...setRows].find(item => item.getAttribute('data-id') === currentId);
+          const returnTarget = row?.querySelector('.play-btn') || heroListenBtn;
+          returnTarget?.focus();
+        }
         playerBar.classList.remove('is-active');
+        playerBar.inert = true;
+        playerBar.setAttribute('aria-hidden', 'true');
       }
       if (typeof document !== 'undefined' && document.body) {
         document.body.classList.remove('has-player-bar');

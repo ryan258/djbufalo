@@ -23,6 +23,11 @@ class El {
   }
   getAttribute(n) { return n in this.attrs ? this.attrs[n] : null; }
   setAttribute(n, v) { this.attrs[n] = v; }
+  contains(other) {
+    for (let node = other; node; node = node.parent) if (node === this) return true;
+    return false;
+  }
+  focus() { document.activeElement = this; }
   append(child) { child.parent = this; this.children.push(child); return child; }
   addEventListener(t, fn) { (this.handlers[t] ||= []).push(fn); }
   click(target = this) {
@@ -62,6 +67,9 @@ const byId = {
   'player-close-btn': new El('button', { id: 'player-close-btn' }),
   'hero-listen-btn': heroBtn,
 };
+byId['audio-player-bar'].append(byId['player-track-display']);
+byId['audio-player-bar'].append(byId['player-toggle-btn']);
+byId['audio-player-bar'].append(byId['player-close-btn']);
 const langBtns = [
   new El('button', { class: 'lang-btn active', 'data-lang': 'es' }),
   new El('button', { class: 'lang-btn', 'data-lang': 'en' }),
@@ -105,13 +113,24 @@ const store = {};
 const localStorage = { getItem: k => store[k] ?? null, setItem: (k, v) => { store[k] = v; } };
 
 // ---- boot -----------------------------------------------------------------
+const activeIntervals = new Set();
+let intervalId = 0;
+const mockSetInterval = () => { const id = ++intervalId; activeIntervals.add(id); return id; };
+const mockClearInterval = id => activeIntervals.delete(id);
 const src = fs.readFileSync('assets/js/main.js', 'utf8');
-new Function('document', 'window', 'localStorage', src)(document, window, localStorage);
+new Function('document', 'window', 'localStorage', 'setInterval', 'clearInterval', src)(document, window, localStorage, mockSetInterval, mockClearInterval);
 
 // 1. Boot order: setLanguage() reads the player nodes, so declaring them after
 //    the initial call threw a TDZ ReferenceError and killed every listener.
 assert.doesNotThrow(domReady, 'DOMContentLoaded handler must not throw');
 assert.ok(heroBtn.handlers.click, 'listeners must get bound after boot');
+function assertPlayerVisibility(visible, reason) {
+  const bar = byId['audio-player-bar'];
+  assert.strictEqual(bar.classList.contains('is-active'), visible, `${reason}: visual visibility`);
+  assert.strictEqual(bar.inert, !visible, `${reason}: keyboard interaction follows visibility`);
+  assert.strictEqual(bar.getAttribute('aria-hidden'), visible ? 'false' : 'true', `${reason}: accessibility visibility`);
+}
+assertPlayerVisibility(false, 'initial offscreen player must be unavailable');
 
 // 2. One click = one toggle. Binding both .play-btn and .set-row fired it
 //    twice (start then immediately stop), so play did nothing at all.
@@ -120,6 +139,7 @@ assert.ok(rows[0].classList.contains('is-playing'),
   'one click on .play-btn must start playback (it bubbles to .set-row — binding both toggled twice)');
 assert.ok(!rows[1].classList.contains('is-playing'), 'only the clicked row plays');
 assert.ok(byId['audio-player-bar'].classList.contains('is-active'), 'player bar reveals');
+assertPlayerVisibility(true, 'playing player is available');
 assert.strictEqual(byId['player-toggle-btn'].textContent, 'PAUSAR');
 assert.strictEqual(heroSpan.textContent, 'SONANDO AHORA');
 
@@ -135,6 +155,7 @@ rows[0].querySelector('.play-btn').click();
 assert.ok(!rows[0].classList.contains('is-playing'), 'second click stops playback');
 assert.strictEqual(heroSpan.textContent, 'LISTEN NOW');
 assert.strictEqual(byId['player-toggle-btn'].textContent, 'RESUME');
+assertPlayerVisibility(true, 'paused player remains available for Resume');
 
 // 5. A paused bar must still follow the language toggle — it used to keep the
 //    language it was paused in ("REANUDAR" sitting next to "(LIVE FEED)").
@@ -182,6 +203,39 @@ rows[1].click();                       // switch to B without stopping first
 assert.strictEqual(padsStarted - padsFaded, 1,
   'switching sets must leave exactly one pad sounding');
 rows[1].click();                       // stop
+
+// 10. Moving from a synthesized set to a clip must stop the old pulse clock.
+let clipsPlayed = 0;
+window.Audio = function () {
+  this.addEventListener = () => {};
+  this.pause = () => {};
+  this.play = () => { clipsPlayed++; return Promise.resolve(); };
+};
+rows[1].setAttribute('data-audio', '/synthetic-test-clip.wav');
+rows[0].click();
+assert.strictEqual(activeIntervals.size, 1, 'synthesized set starts one pulse clock');
+rows[1].click();
+assert.strictEqual(clipsPlayed, 1, 'clip playback was requested through the mock');
+assert.strictEqual(activeIntervals.size, 0, 'switching to a clip must clear the synthesized pulse clock');
+rows[1].click();
+
+// 11. Closed/offscreen controls leave both keyboard and accessibility navigation.
+const closedTrackButton = rows[1].querySelector('.play-btn');
+byId['player-close-btn'].focus();
+byId['player-close-btn'].click();
+assertPlayerVisibility(false, 'closing the player makes its controls unavailable');
+assert.strictEqual(document.activeElement, closedTrackButton, 'closing from the bar returns focus to its track button');
+langBtns[0].click();
+assertPlayerVisibility(false, 'language changes do not expose a closed player');
+closedTrackButton.click();
+assertPlayerVisibility(true, 'starting a set reopens the closed player');
+byId['player-toggle-btn'].click();
+assertPlayerVisibility(true, 'pausing from the player retains an accessible Resume control');
+heroBtn.focus();
+byId['player-close-btn'].click();
+assertPlayerVisibility(false, 'programmatic close also hides player controls');
+assert.strictEqual(document.activeElement, heroBtn, 'close does not steal focus already outside the bar');
+langBtns[1].click();
 
 assert.strictEqual(store.djbufalo_lang, 'en', 'language choice persists');
 console.log('main.js self-check: all assertions passed');
