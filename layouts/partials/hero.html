@@ -30,12 +30,14 @@
 
     <div class="hero-actions">
       {{ $first := index hugo.Data.sets.items 0 }}
-      <button id="hero-listen-btn" class="btn-action" type="button" data-id="{{ $first.id }}" data-bpm="{{ $first.bpm }}" data-audio="{{ printf "audio/%s.mp3" $first.id | relURL }}">
+      <button id="hero-listen-btn" class="btn-action" type="button" data-id="{{ $first.id }}" data-bpm="{{ $first.bpm }}" {{ if fileExists (printf "static/audio/%s.mp3" $first.id) }}data-audio="{{ printf "audio/%s.mp3" $first.id | relURL }}"{{ end }}>
         <span data-i18n data-es="ESCUCHAR AHORA" data-en="LISTEN NOW">ESCUCHAR AHORA</span>
         <span class="btn-arrow" aria-hidden="true">&rarr;</span>
       </button>
 
-      {{ $fechas := where site.RegularPages "Section" "fechas" }}
+      {{/* ponytail: "today" is build time; the site only re-sorts dates when it rebuilds (each push). Add a schedule trigger to deploy.yml if it must roll over on its own. */}}
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $fechas := where (where site.RegularPages "Section" "fechas") "Params.event_date" "ge" $today }}
       {{ if $fechas }}
       {{ $next := index $fechas.ByWeight 0 }}
       <a href="{{ $next.RelPermalink }}" class="hero-next-date">

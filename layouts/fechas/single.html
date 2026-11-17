@@ -1,8 +1,13 @@
 {{ define "main" }}
+{{ $isPast := lt .Params.event_date (now.Format "2006-01-02") }}
 <article class="site-section page-event-detail">
   <div class="event-detail-header">
     <div class="event-badge-bar">
+      {{ if $isPast }}
+      <span class="event-badge" data-i18n data-es="FECHA REALIZADA // ARCHIVO MANZIA" data-en="PAST DATE // MANZIA ARCHIVE">FECHA REALIZADA // ARCHIVO MANZIA</span>
+      {{ else }}
       <span class="event-badge" data-i18n data-es="FECHA CONFIRMADA // AGENDA MANZIA" data-en="CONFIRMED DATE // MANZIA SCHEDULE">FECHA CONFIRMADA // AGENDA MANZIA</span>
+      {{ end }}
       <span class="event-code">BUF-EVENTO</span>
     </div>
 
@@ -70,7 +75,12 @@
       <div class="event-body-content">
         <h2 class="section-subhead" data-i18n data-es="DETALLES DE LA FECHA" data-en="EVENT DETAILS">DETALLES DE LA FECHA</h2>
         <div class="event-prose">
+          {{ with .Params.body_en }}
+          <div class="lang-es" lang="es-AR">{{ $.Content }}</div>
+          <div class="lang-en" lang="en">{{ . | markdownify }}</div>
+          {{ else }}
           {{ .Content }}
+          {{ end }}
         </div>
       </div>
 
@@ -81,15 +91,21 @@
           <li data-i18n data-es="Ingreso únicamente para mayores de 18 años con documento físico." data-en="Admission strictly 18+ with physical ID.">Ingreso únicamente para mayores de 18 años con documento físico.</li>
           <li data-i18n data-es="Cabina a oscuras. Prohibido usar flash o luces de teléfono en la pista." data-en="Dark booth. No flash photography or phone lights on the dancefloor.">Cabina a oscuras. Prohibido usar flash o luces de teléfono en la pista.</li>
           <li data-i18n data-es="Cero tolerancia a conductas irrespetuosas. Cuidar al que baila al lado." data-en="Zero tolerance for harassment. Respect fellow dancers.">Cero tolerancia a conductas irrespetuosas. Cuidar al que baila al lado.</li>
+          <li data-i18n data-es="No se aplaude entre temas. No hay entre temas." data-en="No applause between tracks. There is no between tracks.">No se aplaude entre temas. No hay entre temas.</li>
+          <li data-i18n data-es="Se puede pedir agua en la barra a cualquier hora. Temas, no." data-en="Water is available at the bar at any hour. Songs are not.">Se puede pedir agua en la barra a cualquier hora. Temas, no.</li>
         </ul>
       </div>
     </div>
 
     <!-- Right Ticket / RSVP Sidebar -->
     <aside class="event-sidebar-col">
-      <div class="ticket-booking-card status-{{ .Params.status_type }}">
+      <div class="ticket-booking-card status-{{ cond $isPast "soldout" .Params.status_type }}">
         <div class="ticket-card-header">
+          {{ if $isPast }}
+          <div class="ticket-status-pill" data-i18n data-es="REALIZADA" data-en="PAST">REALIZADA</div>
+          {{ else }}
           <div class="ticket-status-pill" data-i18n data-es="{{ .Params.status_es }}" data-en="{{ .Params.status_en }}">{{ .Params.status_es }}</div>
+          {{ end }}
           <div class="ticket-date-badge">{{ .Params.date_day }} {{ .Params.date_month_es }}</div>
         </div>
 
@@ -100,7 +116,14 @@
         </div>
 
         <div class="ticket-action-wrap">
-          {{ if eq .Params.status_type "active" }}
+          {{ if $isPast }}
+          <div class="btn-ticket btn-status-soldout btn-full-width text-center" data-i18n data-es="FECHA REALIZADA" data-en="DATE HAS PASSED">
+            FECHA REALIZADA
+          </div>
+          <div class="ticket-disclaimer" data-i18n data-es="La persiana ya bajó. Las próximas fechas están en la agenda." data-en="The shutter is already down. Upcoming dates are on the schedule.">
+            La persiana ya bajó. Las próximas fechas están en la agenda.
+          </div>
+          {{ else if eq .Params.status_type "active" }}
           <a href="{{ .Params.ticket_url }}" class="btn-action btn-full-width">
             <span data-i18n data-es="RESERVAR ENTRADA" data-en="RESERVE TICKET">RESERVAR ENTRADA</span>
             <span class="btn-arrow" aria-hidden="true">&rarr;</span>

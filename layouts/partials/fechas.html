@@ -5,8 +5,9 @@
   </div>
 
   <div class="fechas-list">
-    {{ $fechas := where site.RegularPages "Section" "fechas" }}
-    {{ range $fechas.ByWeight }}
+    {{ $today := now.Format "2006-01-02" }}
+    {{ $fechas := where (where site.RegularPages "Section" "fechas") "Params.event_date" "ge" $today }}
+    {{ range first 5 $fechas.ByWeight }}
     <div class="fecha-row status-{{ .Params.status_type }}" data-id="{{ .File.TranslationBaseName }}">
       <div class="fecha-date-col">
         <div class="fecha-day">{{ .Params.date_day }}</div>
@@ -27,8 +28,8 @@
 
       <div class="fecha-action-col">
         {{ if eq .Params.status_type "soldout" }}
-        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Params.venue }} &mdash; AGOTADO">
-          <span data-i18n data-es="AGOTADO" data-en="SOLD OUT">AGOTADO</span>
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Params.venue }} &mdash; {{ .Params.status_es }}">
+          <span data-i18n data-es="{{ .Params.status_es }}" data-en="{{ .Params.status_en }}">{{ .Params.status_es }}</span>
           <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
         </a>
         {{ else }}

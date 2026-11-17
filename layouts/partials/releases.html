@@ -5,7 +5,7 @@
   </div>
 
   <div class="releases-grid">
-    {{ range hugo.Data.releases.items }}
+    {{ range first 3 hugo.Data.releases.items }}
     <article class="release-card" data-cat="{{ .cat_no }}">
       <div class="release-cover-wrap">
         <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">

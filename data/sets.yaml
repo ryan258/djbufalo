@@ -32,6 +32,45 @@ items:
     image: "images/set-terraza.webp"
     bpm: 128
 
+  - id: lavadero-villa-crespo
+    title_es: "LAVADERO AUTOMÁTICO"
+    title_en: "LAUNDROMAT SESSION"
+    location_es: "Villa Crespo, ARG"
+    location_en: "Villa Crespo, ARG"
+    date_es: "08 Ago 2025"
+    date_en: "08 Aug 2025"
+    duration: "03:00:00"
+    image: "images/chacarita-wall.webp"
+    bpm: 124
+    note_es: "Grabado entre las secadoras 4 y 5. El ciclo largo dura 54 minutos; el set está mezclado en función de eso. Se escucha un botón."
+    note_en: "Recorded between dryers 4 and 5. The long cycle runs 54 minutes; the set is mixed around it. A button can be heard."
+
+  - id: prueba-de-sonido
+    title_es: "PRUEBA DE SONIDO (COMPLETA)"
+    title_en: "SOUNDCHECK (FULL LENGTH)"
+    location_es: "Galpón 12, Chacarita"
+    location_en: "Galpón 12, Chacarita"
+    date_es: "26 Sep 2023"
+    date_en: "26 Sep 2023"
+    duration: "03:04:51"
+    image: "images/set-galpon12.webp"
+    bpm: 126
+    note_es: "Iba a ser una prueba de diez minutos. Nadie se animó a cortarla. Las puertas abrieron con el set a la mitad y la gente entró en silencio, como a misa empezada."
+    note_en: "It was meant to be a ten-minute check. Nobody dared cut it. Doors opened halfway through and people came in quietly, like walking into mass late."
+
+  - id: linea-152
+    title_es: "IDA Y VUELTA, DOS VECES"
+    title_en: "THERE AND BACK, TWICE"
+    location_es: "Colectivo, recorrido completo"
+    location_en: "City bus, full route"
+    date_es: "21 Mar 2024"
+    date_en: "21 Mar 2024"
+    duration: "03:12:40"
+    image: "images/set-manada.webp"
+    bpm: 125
+    note_es: "Un recorrido completo, ida y vuelta, dos veces. El chofer pidió una copia. Los cambios coinciden con las paradas; los frenos no fueron editados."
+    note_en: "A full route, there and back, twice. The driver asked for a copy. Transitions land on the stops; the braking was not edited."
+
 feature:
   image: "images/sets-feature-historia.webp"
   alt_es: "Aquí también se baila historia"

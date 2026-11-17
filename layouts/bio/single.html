@@ -54,9 +54,51 @@
         <div class="quote-author">&mdash; DJ BUFALO / MANZIA BOOKINGS</div>
       </div>
 
+      {{ with hugo.Data.historia }}
+      {{ range .chapters }}
+      <section class="story-chapter">
+        <h2 class="chapter-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h2>
+        <p data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</p>
+      </section>
+      {{ end }}
+
+      <section class="story-chapter">
+        <h2 class="chapter-title" data-i18n data-es="07. CRONOLOGÍA" data-en="07. TIMELINE">07. CRONOLOGÍA</h2>
+        <ol class="bio-timeline">
+          {{ range .timeline }}
+          <li><span class="timeline-year num-tabular">{{ .year }}</span><span data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</span></li>
+          {{ end }}
+        </ol>
+      </section>
+
+      <section class="story-chapter">
+        <h2 class="chapter-title" data-i18n data-es="08. PREGUNTAS FRECUENTES" data-en="08. FREQUENTLY ASKED QUESTIONS">08. PREGUNTAS FRECUENTES</h2>
+        <dl class="bio-faq">
+          {{ range .faq }}
+          <dt data-i18n data-es="{{ .q_es }}" data-en="{{ .q_en }}">{{ .q_es }}</dt>
+          <dd data-i18n data-es="{{ .a_es }}" data-en="{{ .a_en }}">{{ .a_es }}</dd>
+          {{ end }}
+        </dl>
+      </section>
+
+      <section class="story-chapter">
+        <h2 class="chapter-title" data-i18n data-es="09. GLOSARIO DE CABINA" data-en="09. BOOTH GLOSSARY">09. GLOSARIO DE CABINA</h2>
+        <dl class="bio-faq">
+          {{ range .glossary }}
+          <dt data-i18n data-es="{{ .term }}" data-en="{{ .term }} ({{ .gloss_en }})">{{ .term }}</dt>
+          <dd data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</dd>
+          {{ end }}
+        </dl>
+      </section>
+      {{ end }}
+
       <div class="editorial-nav-footer">
         <a href="{{ site.Home.RelPermalink }}" class="btn-action">
           <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
+        </a>
+        <a href="{{ "cronicas/" | relURL }}" class="btn-secondary">
+          <span data-i18n data-es="LEER CRÓNICAS NOCTURNAS" data-en="READ NIGHT CHRONICLES">LEER CRÓNICAS NOCTURNAS</span>
+          <span class="btn-arrow" aria-hidden="true">&rarr;</span>
         </a>
         <a href="{{ "sets/" | relURL }}" class="btn-secondary">
           <span data-i18n data-es="ESCUCHAR SETS" data-en="LISTEN TO SETS">ESCUCHAR SETS</span>

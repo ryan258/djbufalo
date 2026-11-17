@@ -180,3 +180,10 @@ body {
   }
 }
 
+
+// Long bilingual prose (markdown bodies) can't go through data-i18n's textContent swap,
+// so both languages render and main.js's <html lang> flip picks one.
+html[lang="en"] .lang-es,
+html:not([lang="en"]) .lang-en {
+  display: none;
+}

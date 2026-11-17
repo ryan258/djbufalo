@@ -14,11 +14,15 @@
       <li data-i18n data-es="Sesiones de cierre continuo (3 horas mínimo). Horarios estrictos." data-en="Continuous closing sets (3 hours minimum). Strict schedule.">Sesiones de cierre continuo (3 horas mínimo). Horarios estrictos.</li>
       <li data-i18n data-es="Cabina a oscuras. Prohibido filmar con flash en la pista." data-en="Dark booth. No flash recording on the dancefloor.">Cabina a oscuras. Prohibido filmar con flash en la pista.</li>
       <li data-i18n data-es="Cero pedidos de canciones. Dejar que la música respire." data-en="Zero music requests. Let the music breathe.">Cero pedidos de canciones. Dejar que la música respire.</li>
+      <li data-i18n data-es="Después de las 04:17 se entra en silencio, como a misa empezada." data-en="After 04:17, come in quietly, like walking into mass late.">Después de las 04:17 se entra en silencio, como a misa empezada.</li>
+      <li data-i18n data-es="No se guardan lugares en la pista. La pista no es de nadie, y también es nuestra." data-en="No saving spots on the dancefloor. It belongs to nobody, and it is ours too.">No se guardan lugares en la pista. La pista no es de nadie, y también es nuestra.</li>
+      <li data-i18n data-es="Hay guardarropa (ver Despacho #013)." data-en="There is a coat check (see Dispatch #013).">Hay guardarropa (ver Despacho #013).</li>
     </ul>
   </div>
 
   <div class="fechas-extended-list">
-    {{ range .Pages.ByWeight }}
+    {{ $today := now.Format "2006-01-02" }}
+    {{ range where .Pages.ByWeight "Params.event_date" "ge" $today }}
     <article class="fecha-card-detailed status-{{ .Params.status_type }}">
       <div class="card-date-badge">
         <span class="day-num">{{ .Params.date_day }}</span>
@@ -40,8 +44,8 @@
 
       <div class="card-action-box">
         {{ if eq .Params.status_type "soldout" }}
-        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Title }} &mdash; AGOTADO">
-          <span data-i18n data-es="AGOTADO" data-en="SOLD OUT">AGOTADO</span>
+        <a href="{{ .RelPermalink }}" class="btn-ticket btn-status-soldout" aria-label="{{ .Title }} &mdash; {{ .Params.status_es }}">
+          <span data-i18n data-es="{{ .Params.status_es }}" data-en="{{ .Params.status_en }}">{{ .Params.status_es }}</span>
           <span class="ticket-arrow" aria-hidden="true">&rarr;</span>
         </a>
         {{ else }}
@@ -54,6 +58,18 @@
     </article>
     {{ end }}
   </div>
+
+  {{ $past := where .Pages.ByWeight.Reverse "Params.event_date" "lt" $today }}
+  {{ if $past }}
+  <div class="tour-policy-box">
+    <div class="policy-title" data-i18n data-es="FECHAS REALIZADAS (LA PERSIANA YA BAJÓ):" data-en="PAST DATES (THE SHUTTER IS ALREADY DOWN):">FECHAS REALIZADAS (LA PERSIANA YA BAJÓ):</div>
+    <ul class="policy-list">
+      {{ range $past }}
+      <li><a href="{{ .RelPermalink }}" class="venue-title-link"><span data-i18n data-es="{{ .Params.date_full_es }}" data-en="{{ .Params.date_full_en }}">{{ .Params.date_full_es }}</span> &mdash; {{ .Params.venue }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
 
   <div class="editorial-nav-footer">
     <a href="{{ site.Home.RelPermalink }}" class="btn-action">

@@ -1727,6 +1727,30 @@ body.has-player-bar {
   }
 }
 
+.press-quotes-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  .press-card {
+    margin: 0;
+  }
+
+  .press-card .press-card-body {
+    font-family: $font-display;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.15;
+  }
+
+  .press-quote-outlet {
+    font-family: $font-mono;
+    font-size: $type-micro;
+    font-weight: 700;
+    color: $color-amber;
+    letter-spacing: 0.12em;
+  }
+}
+
 .press-card {
   background: $color-charcoal-card;
   border: 1px solid $color-border;
@@ -2036,6 +2060,67 @@ body.has-player-bar {
     }
   }
 
+  .bio-timeline,
+  .bio-faq {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: $type-body;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  .bio-timeline li {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: $space-2;
+    padding: 10px 0;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  .timeline-year {
+    font-family: $font-mono;
+    font-size: 13px;
+    font-weight: 700;
+    color: $color-amber;
+    padding-top: 2px;
+  }
+
+  .bio-faq {
+    dt {
+      font-family: $font-mono;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: $color-bone;
+      margin-top: $space-3;
+    }
+
+    dd {
+      margin: 4px 0 0 0;
+    }
+  }
+
+  .cronicas-body {
+    max-width: 680px;
+
+    .story-chapter {
+      margin-bottom: $space-6;
+
+      p + p {
+        margin-top: $space-2;
+      }
+    }
+  }
+
+  .cronica-meta {
+    font-family: $font-mono;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: $color-amber;
+    margin-bottom: $space-3;
+  }
+
   .editorial-quote-box {
     background: $color-charcoal-card;
     border-left: 3px solid $color-amber;
@@ -2222,6 +2307,13 @@ body.has-player-bar {
       margin: 0 0 $space-3 0;
     }
 
+    .archive-set-note {
+      font-size: 14px;
+      line-height: 1.6;
+      color: $color-text-secondary;
+      margin: (-$space-1) 0 $space-3 0;
+    }
+
     .archive-set-details {
       border-top: 1px solid $color-border-subtle;
       border-bottom: 1px solid $color-border-subtle;
@@ -2360,6 +2452,39 @@ body.has-player-bar {
       color: $color-text-secondary;
       line-height: 1.6;
       margin-bottom: $space-3;
+    }
+
+    .disco-notes {
+      border-left: 2px solid $color-border-strong;
+      padding-left: $space-2;
+      margin-bottom: $space-3;
+      font-size: 14px;
+      line-height: 1.6;
+      color: $color-text-secondary;
+
+      p {
+        margin: 0 0 $space-1 0;
+      }
+
+      .disco-notes-head,
+      figcaption {
+        font-family: $font-mono;
+        font-size: $type-micro;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: $color-amber;
+        margin-bottom: 4px;
+      }
+
+      .disco-review {
+        margin: $space-2 0 0 0;
+
+        blockquote {
+          margin: 0 0 4px 0;
+          color: $color-bone;
+          font-style: italic;
+        }
+      }
     }
 
     .disco-tracklist {
@@ -2655,8 +2780,13 @@ body.has-player-bar {
         font-size: $type-micro;
         color: $color-bone;
 
+        gap: $space-2;
+        text-align: right;
+
         .spec-k {
           color: $color-text-dim;
+          flex-shrink: 0;
+          text-align: left;
         }
       }
     }

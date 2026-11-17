@@ -1,0 +1,37 @@
+{{ define "main" }}
+{{ $c := hugo.Data.cronicas }}
+<article class="site-section page-editorial">
+  <div class="editorial-header">
+    <div class="editorial-cat">BUF-ARCHIVO 01&ndash;06 &bull; CHACARITA, BUENOS AIRES</div>
+    <h1 class="headline-hero" data-i18n data-es="CRÓNICAS NOCTURNAS" data-en="NIGHT CHRONICLES">CRÓNICAS NOCTURNAS</h1>
+    <div class="editorial-meta-bar">
+      <div data-i18n data-es="SEIS MICROFICCIONES" data-en="SIX MICROFICTIONS">SEIS MICROFICCIONES</div>
+      <div>MANZIA BOOKINGS</div>
+    </div>
+  </div>
+
+  <div class="cronicas-body">
+    <p class="editorial-lead" data-i18n data-es="Regla de la serie: {{ $c.rule_es }}" data-en="Series rule: {{ $c.rule_en }}">Regla de la serie: {{ $c.rule_es }}</p>
+
+    {{ range $c.items }}
+    <section class="story-chapter" id="cronica-{{ .num }}">
+      <h2 class="chapter-title" data-i18n data-es="{{ .num }} · {{ .title_es }}" data-en="{{ .num }} · {{ .title_en }}">{{ .num }} · {{ .title_es }}</h2>
+      <div class="cronica-meta" data-i18n data-es="{{ .meta_es }}" data-en="{{ .meta_en }}">{{ .meta_es }}</div>
+      {{ range .paragraphs }}
+      <p data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</p>
+      {{ end }}
+    </section>
+    {{ end }}
+
+    <div class="editorial-nav-footer">
+      <a href="{{ "bio/" | relURL }}" class="btn-action">
+        <span data-i18n data-es="&larr; VOLVER A LA HISTORIA" data-en="&larr; BACK TO THE LORE">&larr; VOLVER A LA HISTORIA</span>
+      </a>
+      <a href="{{ "fechas/" | relURL }}" class="btn-secondary">
+        <span data-i18n data-es="VER PRÓXIMAS FECHAS" data-en="VIEW TOUR DATES">VER PRÓXIMAS FECHAS</span>
+        <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</article>
+{{ end }}

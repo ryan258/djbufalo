@@ -5,7 +5,7 @@
   </div>
 
   <div class="merch-grid">
-    {{ range hugo.Data.merch.items }}
+    {{ range first 3 hugo.Data.merch.items }}
     <div class="merch-card status-{{ .status_type }}">
       <div class="merch-thumb-wrap">
         <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">

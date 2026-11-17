@@ -42,6 +42,12 @@
             <span class="spec-k" data-i18n data-es="ENVÍO:" data-en="SHIPPING:">ENVÍO:</span>
             <span data-i18n data-es="Argentina &bull; Retiro en Chacarita" data-en="Argentina &bull; Chacarita pickup">Argentina &bull; Retiro en Chacarita</span>
           </div>
+          {{ if .care_es }}
+          <div class="spec-line">
+            <span class="spec-k" data-i18n data-es="CUIDADO:" data-en="CARE:">CUIDADO:</span>
+            <span data-i18n data-es="{{ .care_es }}" data-en="{{ .care_en }}">{{ .care_es }}</span>
+          </div>
+          {{ end }}
         </div>
 
         <div class="merch-full-action">

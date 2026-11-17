@@ -1,4 +1,5 @@
 ---
+event_date: "2026-12-05"
 title: "FESTIVAL BAJADA // COSTANERA NORTE"
 title_en: "BAJADA FESTIVAL // COSTANERA NORTE"
 date_day: "05"
@@ -33,6 +34,12 @@ lineup:
     artist: "DJ BUFALO"
     role_es: "Cierre Oficial del Festival"
     role_en: "Official Festival Closing Set"
+body_en: |
+  The year's closing night at the River Pavilion by the water. DJ Bufalo takes over the club stage in the darkest hours of the morning to steer the transition toward the first sun over the Río de la Plata.
+
+  Festival production offered LED screens, flamethrowers and a countdown to sunrise. The sun was accepted. Everything else stayed in storage.
 ---
 
 Cierre del año en el Pabellón Río frente al agua. DJ Bufalo toma el control del escenario club en las horas más oscuras de la madrugada para conducir la transición hacia el primer sol sobre el Río de la Plata.
+
+La producción del festival ofreció pantallas LED, lanzallamas y un conteo regresivo para la salida del sol. Se aceptó el sol. El resto quedó en el depósito.

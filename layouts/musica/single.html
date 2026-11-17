@@ -37,6 +37,19 @@
           {{ end }}
         </div>
 
+        {{ if .notes_es }}
+        <div class="disco-notes">
+          <div class="disco-notes-head" data-i18n data-es="NOTAS DE TAPA:" data-en="SLEEVE NOTES:">NOTAS DE TAPA:</div>
+          <p data-i18n data-es="{{ .notes_es }}" data-en="{{ .notes_en }}">{{ .notes_es }}</p>
+          {{ if .review_es }}
+          <figure class="disco-review">
+            <blockquote data-i18n data-es="&ldquo;{{ .review_es }}&rdquo;" data-en="&ldquo;{{ .review_en }}&rdquo;">&ldquo;{{ .review_es }}&rdquo;</blockquote>
+            <figcaption>&mdash; {{ .review_outlet }}</figcaption>
+          </figure>
+          {{ end }}
+        </div>
+        {{ end }}
+
         <div class="disco-actions">
           <a href="https://spotify.com" target="_blank" rel="noopener noreferrer" class="btn-stream">
             <span>SPOTIFY</span>

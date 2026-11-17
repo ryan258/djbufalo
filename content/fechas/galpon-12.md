@@ -1,4 +1,5 @@
 ---
+event_date: "2026-10-18"
 title: "GALPÓN 12 // CIERRE EN CHACARITA"
 title_en: "GALPÓN 12 // CHACARITA CLOSING"
 date_day: "18"
@@ -33,8 +34,16 @@ lineup:
     artist: "DJ BUFALO"
     role_es: "Cierre de Pista (3 Horas sin apuro)"
     role_en: "Closing Set (3 Hours unhurried)"
+body_en: |
+  Extended session at Chacarita's reference warehouse. Sound system calibrated exclusively for low frequencies, a dark booth and a room cleared of gimmicks.
+
+  Music started on the dot at 01:00 and DJ Bufalo handled the shutter from 03:30 until the morning light forced the power off.
+
+  Archive note: at 04:17 the last booth light went out, as stated in the rider. The new sound engineer did not come up with a flashlight. He was congratulated in private.
 ---
 
-Sesión extendida en el galpón de referencia de Chacarita. Sistema de sonido calibrado exclusivamente para frecuencias graves, cabina a oscuras y ambiente despejado de artificios. 
+Sesión extendida en el galpón de referencia de Chacarita. Sistema de sonido calibrado exclusivamente para frecuencias graves, cabina a oscuras y ambiente despejado de artificios.
 
-La música arranca puntual a la 01:00 y la bajada de persiana está a cargo de DJ Bufalo desde las 03:30 hasta que la luz del amanecer obligue a cortar la corriente.
+La música arrancó puntual a la 01:00 y la bajada de persiana estuvo a cargo de DJ Bufalo desde las 03:30 hasta que la luz del amanecer obligó a cortar la corriente.
+
+Nota de archivo: a las 04:17 se apagó la última luz de cabina, como figura en el rider. El sonidista nuevo no subió con la linterna. Se lo felicitó en privado.

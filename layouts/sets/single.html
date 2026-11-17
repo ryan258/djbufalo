@@ -18,7 +18,7 @@
 
   <div class="sets-archive-grid">
     {{ range hugo.Data.sets.items }}
-    <article class="archive-set-card set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" data-audio="{{ printf "audio/%s.mp3" .id | relURL }}">
+    <article class="archive-set-card set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" {{ if fileExists (printf "static/audio/%s.mp3" .id) }}data-audio="{{ printf "audio/%s.mp3" .id | relURL }}"{{ end }}>
       <div class="archive-thumb-wrap">
         <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy">
         <button class="play-btn" type="button" aria-pressed="false" aria-label="Reproducir {{ .title_es }} / Play {{ .title_en }}">
@@ -37,6 +37,7 @@
         </div>
 
         <h2 class="archive-set-title" data-i18n data-es="{{ .title_es }}" data-en="{{ .title_en }}">{{ .title_es }}</h2>
+        {{ if .note_es }}<p class="archive-set-note" data-i18n data-es="{{ .note_es }}" data-en="{{ .note_en }}">{{ .note_es }}</p>{{ end }}
 
         <div class="archive-set-details">
           <div class="detail-row">

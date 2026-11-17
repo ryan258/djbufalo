@@ -8,8 +8,8 @@
     <!-- Left: Track Rows -->
     <div class="sets-col-left">
       <div class="sets-list">
-        {{ range hugo.Data.sets.items }}
-        <div class="set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" data-audio="{{ printf "audio/%s.mp3" .id | relURL }}">
+        {{ range first 3 hugo.Data.sets.items }}
+        <div class="set-row" data-id="{{ .id }}" data-title="{{ .title_es }}" data-title-en="{{ .title_en }}" data-bpm="{{ .bpm }}" {{ if fileExists (printf "static/audio/%s.mp3" .id) }}data-audio="{{ printf "audio/%s.mp3" .id | relURL }}"{{ end }}>
           <div class="set-thumb">
             <img src="{{ .image | relURL }}" alt="{{ .title_es }}" loading="lazy"
                  data-i18n-alt data-alt-es="{{ .title_es }}" data-alt-en="{{ .title_en }}">

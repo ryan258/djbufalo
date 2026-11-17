@@ -52,6 +52,37 @@
   <!-- Technical & Hospitality Rider Section -->
   {{ partial "rider.html" . }}
 
+  <!-- Contract Clauses -->
+  <section id="clausulas" class="site-section">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n data-es="CLÁUSULAS DE CONTRATACIÓN" data-en="BOOKING TERMS">CLÁUSULAS DE CONTRATACIÓN</h2>
+      <div class="section-tagline" data-i18n data-es="EXTRACTO DEL CONTRATO TIPO &mdash; MANZIA BOOKINGS" data-en="STANDARD CONTRACT EXCERPT &mdash; MANZIA BOOKINGS">EXTRACTO DEL CONTRATO TIPO &mdash; MANZIA BOOKINGS</div>
+    </div>
+    <div class="tour-policy-box">
+      <ol class="policy-list">
+        {{ range hugo.Data.clausulas.items }}
+        <li data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</li>
+        {{ end }}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Press Quotes -->
+  <section id="press-quotes" class="site-section">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n data-es="LO QUE DIJO LA PRENSA" data-en="WHAT THE PRESS SAID">LO QUE DIJO LA PRENSA</h2>
+      <div class="section-tagline" data-i18n data-es="CITAS AUTORIZADAS &mdash; SIN EDITAR" data-en="APPROVED QUOTES &mdash; UNEDITED">CITAS AUTORIZADAS &mdash; SIN EDITAR</div>
+    </div>
+    <div class="press-kit-grid press-quotes-grid">
+      {{ range hugo.Data.prensa.items }}
+      <figure class="press-card">
+        <blockquote class="press-card-body" data-i18n data-es="&ldquo;{{ .es }}&rdquo;" data-en="&ldquo;{{ .en }}&rdquo;">&ldquo;{{ .es }}&rdquo;</blockquote>
+        <figcaption class="press-quote-outlet">&mdash; {{ .outlet }}</figcaption>
+      </figure>
+      {{ end }}
+    </div>
+  </section>
+
   <!-- Press Assets & Bio Kit Module -->
   <section id="press-assets" class="site-section">
     <div class="section-header">

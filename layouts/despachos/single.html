@@ -1,0 +1,37 @@
+{{ define "main" }}
+<article class="site-section page-editorial">
+  <div class="editorial-header">
+    <div class="editorial-cat" data-i18n data-es="DESPACHO // ARCHIVO DE ENVÍOS" data-en="DISPATCH // SEND ARCHIVE">DESPACHO // ARCHIVO DE ENVÍOS</div>
+    <h1 class="headline-hero" data-i18n data-es="DESPACHOS ANTERIORES" data-en="PAST DISPATCHES">DESPACHOS ANTERIORES</h1>
+    <div class="editorial-meta-bar">
+      <div data-i18n data-es="ENVIADOS A LAS 04:17 &bull; SIN EXCEPCIÓN" data-en="SENT AT 04:17 &bull; WITHOUT EXCEPTION">ENVIADOS A LAS 04:17 &bull; SIN EXCEPCIÓN</div>
+      <div>MANZIA BOOKINGS</div>
+    </div>
+  </div>
+
+  <div class="cronicas-body">
+    <p class="editorial-lead" data-i18n
+       data-es="Los números que faltan no se perdieron. Se enviaron a quienes estaban suscriptos en ese momento."
+       data-en="The missing numbers were not lost. They were sent to whoever was subscribed at the time.">Los números que faltan no se perdieron. Se enviaron a quienes estaban suscriptos en ese momento.</p>
+
+    {{ range hugo.Data.despachos.items }}
+    <section class="story-chapter" id="despacho-{{ .num }}">
+      <h2 class="chapter-title" data-i18n data-es="#{{ .num }} · {{ .subject_es }}" data-en="#{{ .num }} · {{ .subject_en }}">#{{ .num }} · {{ .subject_es }}</h2>
+      <div class="cronica-meta" data-i18n data-es="{{ .date_es }}" data-en="{{ .date_en }}">{{ .date_es }}</div>
+      <p data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</p>
+    </section>
+    {{ end }}
+
+    <div class="editorial-nav-footer">
+      <a href="{{ site.Home.RelPermalink }}#newsletter" class="btn-action">
+        <span data-i18n data-es="SUSCRIBIRME AL DESPACHO" data-en="SUBSCRIBE TO THE DISPATCH">SUSCRIBIRME AL DESPACHO</span>
+        <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a href="{{ "fechas/" | relURL }}" class="btn-secondary">
+        <span data-i18n data-es="VER PRÓXIMAS FECHAS" data-en="VIEW TOUR DATES">VER PRÓXIMAS FECHAS</span>
+        <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</article>
+{{ end }}
