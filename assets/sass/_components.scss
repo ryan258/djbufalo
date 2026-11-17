@@ -1727,6 +1727,15 @@ body.has-player-bar {
   }
 }
 
+// References are longer than press one-liners: body type, not display caps.
+.press-quotes-grid.press-refs-grid .press-card .press-card-body {
+  font-family: $font-sans;
+  font-size: $type-body;
+  font-weight: 500;
+  text-transform: none;
+  line-height: 1.6;
+}
+
 .press-quotes-grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
@@ -1878,6 +1887,10 @@ body.has-player-bar {
 
 .footer-epk-wrap {
   margin-top: $space-2;
+
+  & + & {
+    margin-top: $space-1;
+  }
 
   .footer-epk-link {
     font-family: $font-mono;
@@ -2329,9 +2342,12 @@ body.has-player-bar {
         font-family: $font-mono;
         font-size: $type-micro;
         color: $color-bone;
+        gap: $space-2;
+        text-align: right;
 
         .detail-label {
           color: $color-text-dim;
+          flex-shrink: 0;
         }
       }
     }

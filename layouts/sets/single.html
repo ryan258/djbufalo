@@ -54,6 +54,18 @@
           </div>
         </div>
 
+        {{ with .tracklist }}
+        <div class="archive-set-details">
+          <div class="detail-row"><span class="detail-label">TRACKLIST:</span></div>
+          {{ range . }}
+          <div class="detail-row">
+            <span class="detail-label num-tabular">{{ .time }}</span>
+            <span data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</span>
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+
         <div class="archive-card-actions">
           <a href="https://soundcloud.com/djbufalo" target="_blank" rel="noopener noreferrer" class="btn-archive-listen">
             <span>SOUNDCLOUD</span>

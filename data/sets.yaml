@@ -9,6 +9,22 @@ items:
     duration: "04:17:08"
     image: "images/set-galpon12.webp"
     bpm: 126
+    tracklist:
+      - time: "00:00:00"
+        es: "ID — ID"
+        en: "ID — ID"
+      - time: "01:12:40"
+        es: "ID — ID (otra vez)"
+        en: "ID — ID (again)"
+      - time: "02:31:05"
+        es: "La Mirada Clavada (todavía sin terminar)"
+        en: "The Long Stare (not yet finished)"
+      - time: "03:47:00"
+        es: "— (la luz de cabina, apagándose)"
+        en: "— (the booth light, going out)"
+      - time: "04:07:04"
+        es: "Persiana Abajo"
+        en: "Persiana Abajo"
 
   - id: manzia-night
     title_es: "NOCHE MANZIA EN CHACARITA"
@@ -20,6 +36,19 @@ items:
     duration: "03:58:21"
     image: "images/set-manada.webp"
     bpm: 125
+    tracklist:
+      - time: "00:00:00"
+        es: "ID — ID"
+        en: "ID — ID"
+      - time: "01:30:00"
+        es: "Un vinilo de la Curaduría Manzia que quedó puesto"
+        en: "A Manzia curation record that stayed on"
+      - time: "02:45:12"
+        es: "ID — ID (no es el que pidieron)"
+        en: "ID — ID (not the one requested)"
+      - time: "03:48:00"
+        es: "Cero Firuletes"
+        en: "Cero Firuletes"
 
   - id: cierre-terraza
     title_es: "CIERRE EN LA TERRAZA"
@@ -31,6 +60,16 @@ items:
     duration: "04:02:11"
     image: "images/set-terraza.webp"
     bpm: 128
+    tracklist:
+      - time: "00:00:00"
+        es: "ID — ID"
+        en: "ID — ID"
+      - time: "01:58:00"
+        es: "ID — ID (amanecer)"
+        en: "ID — ID (sunrise)"
+      - time: "03:31:56"
+        es: "Terraza Sunrise Tool"
+        en: "Terraza Sunrise Tool"
 
   - id: lavadero-villa-crespo
     title_es: "LAVADERO AUTOMÁTICO"
@@ -42,6 +81,22 @@ items:
     duration: "03:00:00"
     image: "images/chacarita-wall.webp"
     bpm: 124
+    tracklist:
+      - time: "00:00:00"
+        es: "ID — ID (lavado)"
+        en: "ID — ID (wash)"
+      - time: "00:54:00"
+        es: "ID — ID (centrifugado)"
+        en: "ID — ID (spin)"
+      - time: "01:48:00"
+        es: "ID — ID (secadora 4)"
+        en: "ID — ID (dryer 4)"
+      - time: "02:42:00"
+        es: "ID — ID (secadora 5)"
+        en: "ID — ID (dryer 5)"
+      - time: "02:59:58"
+        es: "Botón"
+        en: "Button"
     note_es: "Grabado entre las secadoras 4 y 5. El ciclo largo dura 54 minutos; el set está mezclado en función de eso. Se escucha un botón."
     note_en: "Recorded between dryers 4 and 5. The long cycle runs 54 minutes; the set is mixed around it. A button can be heard."
 
@@ -55,6 +110,22 @@ items:
     duration: "03:04:51"
     image: "images/set-galpon12.webp"
     bpm: 126
+    tracklist:
+      - time: "00:00:00"
+        es: "Bombo solo (prueba)"
+        en: "Kick only (check)"
+      - time: "00:00:40"
+        es: "Bombo solo (sigue)"
+        en: "Kick only (continues)"
+      - time: "00:10:00"
+        es: "ID — ID (acá terminaba la prueba)"
+        en: "ID — ID (the check was meant to end here)"
+      - time: "01:31:00"
+        es: "ID — ID (se abren las puertas)"
+        en: "ID — ID (doors open)"
+      - time: "02:54:47"
+        es: "Persiana Abajo"
+        en: "Persiana Abajo"
     note_es: "Iba a ser una prueba de diez minutos. Nadie se animó a cortarla. Las puertas abrieron con el set a la mitad y la gente entró en silencio, como a misa empezada."
     note_en: "It was meant to be a ten-minute check. Nobody dared cut it. Doors opened halfway through and people came in quietly, like walking into mass late."
 
@@ -68,6 +139,22 @@ items:
     duration: "03:12:40"
     image: "images/set-manada.webp"
     bpm: 125
+    tracklist:
+      - time: "00:00:00"
+        es: "ID — ID (cabecera)"
+        en: "ID — ID (terminus)"
+      - time: "00:48:20"
+        es: "ID — ID (vuelta)"
+        en: "ID — ID (return leg)"
+      - time: "01:36:30"
+        es: "ID — ID (cabecera, de nuevo)"
+        en: "ID — ID (terminus, again)"
+      - time: "02:24:50"
+        es: "ID — ID (vuelta, otra vez)"
+        en: "ID — ID (return leg, again)"
+      - time: "03:12:38"
+        es: "Timbre de bajada"
+        en: "Stop bell"
     note_es: "Un recorrido completo, ida y vuelta, dos veces. El chofer pidió una copia. Los cambios coinciden con las paradas; los frenos no fueron editados."
     note_en: "A full route, there and back, twice. The driver asked for a copy. Transitions land on the stops; the braking was not edited."
 

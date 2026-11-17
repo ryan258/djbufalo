@@ -71,6 +71,17 @@
   </div>
   {{ end }}
 
+  {{ with hugo.Data.rechazadas.items }}
+  <div class="tour-policy-box">
+    <div class="policy-title" data-i18n data-es="PROPUESTAS RECHAZADAS (EXTRACTO DE AGENDA MANZIA):" data-en="DECLINED OFFERS (MANZIA DIARY EXCERPT):">PROPUESTAS RECHAZADAS (EXTRACTO DE AGENDA MANZIA):</div>
+    <ul class="policy-list">
+      {{ range . }}
+      <li data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
   <div class="editorial-nav-footer">
     <a href="{{ site.Home.RelPermalink }}" class="btn-action">
       <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>

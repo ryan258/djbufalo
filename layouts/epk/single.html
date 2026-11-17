@@ -60,8 +60,9 @@
     </div>
     <div class="tour-policy-box">
       <ol class="policy-list">
-        {{ range hugo.Data.clausulas.items }}
-        <li data-i18n data-es="{{ .es }}" data-en="{{ .en }}">{{ .es }}</li>
+        {{ range $i, $c := hugo.Data.clausulas.items }}
+        {{ $n := add $i 1 }}
+        <li data-i18n data-es="{{ $n }}. {{ $c.es }}" data-en="{{ $n }}. {{ $c.en }}">{{ $n }}. {{ $c.es }}</li>
         {{ end }}
       </ol>
     </div>
@@ -78,6 +79,22 @@
       <figure class="press-card">
         <blockquote class="press-card-body" data-i18n data-es="&ldquo;{{ .es }}&rdquo;" data-en="&ldquo;{{ .en }}&rdquo;">&ldquo;{{ .es }}&rdquo;</blockquote>
         <figcaption class="press-quote-outlet">&mdash; {{ .outlet }}</figcaption>
+      </figure>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- Venue References -->
+  <section id="referencias" class="site-section">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n data-es="REFERENCIAS" data-en="REFERENCES">REFERENCIAS</h2>
+      <div class="section-tagline" data-i18n data-es="GENTE QUE TRABAJÓ UNA NOCHE DE BUFALO &mdash;" data-en="PEOPLE WHO WORKED A BUFALO NIGHT &mdash;">GENTE QUE TRABAJÓ UNA NOCHE DE BUFALO &mdash;</div>
+    </div>
+    <div class="press-kit-grid press-quotes-grid press-refs-grid">
+      {{ range hugo.Data.referencias.items }}
+      <figure class="press-card">
+        <blockquote class="press-card-body" data-i18n data-es="&ldquo;{{ .es }}&rdquo;" data-en="&ldquo;{{ .en }}&rdquo;">&ldquo;{{ .es }}&rdquo;</blockquote>
+        <figcaption class="press-quote-outlet">&mdash; {{ .who }} &bull; <span data-i18n data-es="{{ .role_es }}" data-en="{{ .role_en }}">{{ .role_es }}</span></figcaption>
       </figure>
       {{ end }}
     </div>

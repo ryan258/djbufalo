@@ -68,6 +68,17 @@
     {{ end }}
   </div>
 
+  {{ with hugo.Data.releases.gaps }}
+  <div class="tour-policy-box">
+    <div class="policy-title" data-i18n data-es="HUECOS DEL CATÁLOGO:" data-en="GAPS IN THE CATALOG:">HUECOS DEL CATÁLOGO:</div>
+    <ul class="policy-list">
+      {{ range . }}
+      <li data-i18n data-es="{{ .cat_no }} — {{ .es }}" data-en="{{ .cat_no }} — {{ .en }}">{{ .cat_no }} — {{ .es }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
   <div class="editorial-nav-footer">
     <a href="{{ site.Home.RelPermalink }}" class="btn-action">
       <span data-i18n data-es="&larr; VOLVER AL INICIO" data-en="&larr; RETURN HOME">&larr; VOLVER AL INICIO</span>
